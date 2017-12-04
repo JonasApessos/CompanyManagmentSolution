@@ -1,40 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<script type = "text/javascript" src = "{{ url_for('static', filename = 'hello.js')}}"></script>
-</head>
-<body>
-	<!--<form action = "" method="POST">
-		<p>enter name:</p>
-		<p><input type="text" name="nm"/></p>
-		<p><input type="submit" value="submit"/></p>
-	</form>
-	<input type = "button" onClick = "SayHello()" value = "Say Hello"/>-->
+	<head>
+	</head>
 	
-	<table border = 1>
-         <thead>
-			<td>ID</td>
-            <td>Contractor</td>
-            <td>Due Date</td>
-            <td>Advance Pay</td>
-            <td>Contract Pay</td>
-			<td>Start Date</td>
-            <td>Product Name</td>
-         </thead>
-         
-         {% for row in rows %}
-            <tr>
-				<td>{{row["CMContrInfID"]}}</td>
-               <td>{{row["CMContractor"]}}</td>
-               <td>{{row["CMDueDate"]}}</td>
-               <td>{{row["CMAdvPay"]}}</td>
-               <td>{{row['CMContrPay']}}</td>	
-			   <td> {{row["CMDateS"]}}</td>
-               <td>{{row['CMProdName']}}</td>
-            </tr>
-         {% endfor %}
-      </table>
-      
-      <a href = "/">Go back to home page</a>
-</body>
+	<body>
+		<h1>INDEX</h1>
+		<a href="{{url_for('ContrForm')}}">Contract Form</a>
+		<a href="{{url_for('CompForm')}}">Company Form</a>
+		<a href="{{url_for('EmpForm')}}">Employee Form</a>
+		<a href="{{url_for('TaskForm')}}">Task Form</a>
+	</body>
 </html>
