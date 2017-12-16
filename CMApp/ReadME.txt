@@ -6,4 +6,4 @@ WARNING: This project is based on the flask_12.0 library, if you try to start th
 
 The main start point of the application is CMMain.py , this will fire every action nedded to start the server and the event listeners using the following command -> $python CMMain.py
 
-After starting the server use your browser and type on the url "localhost:5000". Local host is the ip address on your local machine where the server is. The "5000" is the port in which the server is listening from, by default the server is listening in the port 5000.
+After starting the server use your browser and type on the url "localhost:80". Local host is the ip address on your local machine where the server is. The "80" is the port in which the server is listening from, by default the server is listening in the port 5000.
