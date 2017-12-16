@@ -1,12 +1,5 @@
-from flask import Flask, request, render_template
-app = Flask(__name__);
+from . import *
 
-@app.route("/Forms/ContractForm")
-def ContrForm():
-
-	return render_template("Forms/ContractForm.html");
-
-@app.route("/Forms/ContractForm", methods=["POST"])
 def IContract():
 
 	if request.method == "POST":
@@ -26,15 +19,19 @@ def IContract():
 		PName = request.form["ProdName"];
 
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMContrInf(CMContractor,CMDueDate,CMAdvPay,CMContrPay,CMDateS,CMProdName) VALUES(?,?,?,?,?,?);";
+		SqlQuery = "INSERT INTO " + Prefix + "CMContr(CMActiv) \
+		VALUES \
+		(?);";
 		
-		Index.execute(SqlQuery,(Contr,DDate,APay,CPay,DateS,PName));
+		Index.execute(SqlQuery,(1,));
 		
 		LastIndex = Index.lastrowid;
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMContr(CMContrInfID) VALUES(?);";
+		SqlQuery = "INSERT INTO " + Prefix + "CMContrInf(CMContrID,CMContractor,CMDueDate,CMAdvPay,CMContrPay,CMDateS,CMProdName,CMActiv) \
+		VALUES \
+		(?,?,?,?,?,?,?,?);";
 		
-		Index.execute(SqlQuery,(LastIndex,));
+		Index.execute(SqlQuery,(LastIndex,Contr,DDate,APay,CPay,DateS,PName,1));
 		
 		Conn.commit();
 		Conn.close();
@@ -49,8 +46,3 @@ def IContract():
 		CPay = None;
 		DateS = None;
 		PName = None;
-		
-		return render_template("/Forms/ContractForm.html");
-		
-	else:
-		return render_template("index.html");
