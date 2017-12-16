@@ -54,6 +54,22 @@ SqlScript += "DROP TABLE IF EXISTS " + Prefix + "CMEmpAssigTask;";
 Conn.executescript(SqlScript);
 
 #------------------<CREATE TABLES>------------------
+#Contract
+SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMContr \
+( \
+	CMContrID INTEGER PRIMARY KEY AUTOINCREMENT, \
+	CMActiv INTEGERS NOT NULL DEFAULT 0 \
+);";
+Conn.execute(SqlScript);
+
+#Company
+SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMComp \
+( \
+	CMCompID INTEGER PRIMARY KEY AUTOINCREMENT, \
+	CMActiv INTEGERS NOT NULL DEFAULT 0 \
+);";
+Conn.execute(SqlScript);
+
 #Contract Information
 SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMContrInf \
 ( \
@@ -82,22 +98,6 @@ SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMCompInf \
 	CMLocInterest REAL NOT NULL DEFAULT 0.0, \
 	CMActiv INTEGERS NOT NULL DEFAULT 0, \
 	FOREIGN KEY(CMCompID) REFERENCES " + Prefix + "CMComp(CMCompID) \
-);";
-Conn.execute(SqlScript);
-
-#Contract
-SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMContr \
-( \
-	CMContrID INTEGER PRIMARY KEY AUTOINCREMENT, \
-	CMActiv INTEGERS NOT NULL DEFAULT 0 \
-);";
-Conn.execute(SqlScript);
-
-#Company
-SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMComp \
-( \
-	CMCompID INTEGER PRIMARY KEY AUTOINCREMENT, \
-	CMActiv INTEGERS NOT NULL DEFAULT 0 \
 );";
 Conn.execute(SqlScript);
 
@@ -154,6 +154,38 @@ SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMTaskDep \
 );";
 Conn.execute(SqlScript);
 
+#Department
+SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMDep \
+( \
+	CMDepID INTEGER PRIMARY KEY AUTOINCREMENT, \
+	CMCompID INTEGER, \
+	CMActiv INTEGERS NOT NULL DEFAULT 0, \
+	FOREIGN KEY(CMCompID) REFERENCES " + Prefix + "CMComp(CMCompID) \
+);";
+Conn.execute(SqlScript);
+
+#Department Information
+SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMDepInf \
+( \
+	CMDepInfID INTEGER PRIMARY KEY AUTOINCREMENT, \
+	CMDepID INTEGER, \
+	CMName TEXT NOT NULL DEFAULT 'MISSING FIELD', \
+	CMDateC DATETIME NOT NULL DEFAULT (DATETIME('now')), \
+	CMActiv INTEGERS NOT NULL DEFAULT 0, \
+	FOREIGN KEY(CMDepID) REFERENCES " + Prefix + "CMDep(CMDepID) \
+);";
+Conn.execute(SqlScript);
+
+#Employee
+SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMEmp \
+( \
+	CMEmpID INTEGER PRIMARY KEY AUTOINCREMENT, \
+	CMDepID INTEGER, \
+	CMActiv INTEGERS NOT NULL DEFAULT 0, \
+	FOREIGN KEY(CMDepID) REFERENCES " + Prefix + "CMDep(CMDepID) \
+);";
+Conn.execute(SqlScript);
+
 #Employee Information
 SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMEmpInf \
 ( \
@@ -178,38 +210,6 @@ SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMEmpSal \
 	CMDateC DATE NOT NULL, \
 	CMActiv INTEGERS NOT NULL DEFAULT 0, \
 	FOREIGN KEY(CMEmpID) REFERENCES " + Prefix + "CMEmp(CMEmpID)	\
-);";
-Conn.execute(SqlScript);
-
-#Department Information
-SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMDepInf \
-( \
-	CMDepInfID INTEGER PRIMARY KEY AUTOINCREMENT, \
-	CMDepID INTEGER, \
-	CMName TEXT NOT NULL DEFAULT 'MISSING FIELD', \
-	CMDateC DATETIME NOT NULL DEFAULT (DATETIME('now')), \
-	CMActiv INTEGERS NOT NULL DEFAULT 0, \
-	FOREIGN KEY(CMDepID) REFERENCES " + Prefix + "CMDep(CMDepID) \
-);";
-Conn.execute(SqlScript);
-
-#Department
-SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMDep \
-( \
-	CMDepID INTEGER PRIMARY KEY AUTOINCREMENT, \
-	CMCompID INTEGER, \
-	CMActiv INTEGERS NOT NULL DEFAULT 0, \
-	FOREIGN KEY(CMCompID) REFERENCES " + Prefix + "CMComp(CMCompID) \
-);";
-Conn.execute(SqlScript);
-
-#Employee
-SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMEmp \
-( \
-	CMEmpID INTEGER PRIMARY KEY AUTOINCREMENT, \
-	CMDepID INTEGER, \
-	CMActiv INTEGERS NOT NULL DEFAULT 0, \
-	FOREIGN KEY(CMDepID) REFERENCES " + Prefix + "CMDep(CMDepID) \
 );";
 Conn.execute(SqlScript);
 

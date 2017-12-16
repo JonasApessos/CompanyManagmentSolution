@@ -2,29 +2,29 @@ from . import *
 
 def GetProjectList():
 	
-	Conn = sqlite3.connect(Prefix + Database);
+	Conn = sqlite3.connect(PREFIX + DATABASE);
 	Conn.row_factory = sqlite3.Row;
 	
 	Index = Conn.cursor();
 	
 	SqlScript = " \
 	SELECT \
-	"+Prefix+"CMProj.CMProjID, \
-	"+Prefix+"CMCompInf.CMCompName, \
-	"+Prefix+"CMContrInf.CMContractor, \
-	"+Prefix+"CMContrInf.CMDateS, \
-	"+Prefix+"CMContrInf.CMDueDate, \
-	"+Prefix+"CMContrInf.CMProdName \
+	"+PREFIX+"CMProj.CMProjID, \
+	"+PREFIX+"CMCompInf.CMCompName, \
+	"+PREFIX+"CMContrInf.CMContractor, \
+	"+PREFIX+"CMContrInf.CMDateS, \
+	"+PREFIX+"CMContrInf.CMDueDate, \
+	"+PREFIX+"CMContrInf.CMProdName \
 	\
 	FROM \
-	"+Prefix+"CMProj, \
-	"+Prefix+"CMContrInf, \
-	"+Prefix+"CMCompInf \
+	"+PREFIX+"CMProj, \
+	"+PREFIX+"CMContrInf, \
+	"+PREFIX+"CMCompInf \
 	\
 	WHERE \
-	("+Prefix+"CMProj.CMCompID = "+Prefix+"CMCompInf.CMCompID) \
+	("+PREFIX+"CMProj.CMCompID = "+PREFIX+"CMCompInf.CMCompID) \
 	AND \
-	("+Prefix+"CMProj.CMContrID = "+Prefix+"CMContrInf.CMContrID)";
+	("+PREFIX+"CMProj.CMContrID = "+PREFIX+"CMContrInf.CMContrID)";
 	
 	Index.execute(SqlScript);
 	

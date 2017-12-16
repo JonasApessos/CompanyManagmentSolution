@@ -4,7 +4,7 @@ def IContract():
 
 	if request.method == "POST":
 	
-		Conn = sqlite3.connect(Prefix + Database);
+		Conn = sqlite3.connect(PREFIX + DATABASE);
 		Index = Conn.cursor();
 
 		
@@ -19,7 +19,7 @@ def IContract():
 		PName = request.form["ProdName"];
 
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMContr(CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMContr(CMActiv) \
 		VALUES \
 		(?);";
 		
@@ -27,7 +27,7 @@ def IContract():
 		
 		LastIndex = Index.lastrowid;
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMContrInf(CMContrID,CMContractor,CMDueDate,CMAdvPay,CMContrPay,CMDateS,CMProdName,CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMContrInf(CMContrID,CMContractor,CMDueDate,CMAdvPay,CMContrPay,CMDateS,CMProdName,CMActiv) \
 		VALUES \
 		(?,?,?,?,?,?,?,?);";
 		

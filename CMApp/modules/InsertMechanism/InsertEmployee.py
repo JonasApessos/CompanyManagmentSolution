@@ -3,7 +3,7 @@ from . import *
 def IEmployee():
 	if request.method == "POST":
 		
-		Conn = sqlite3.connect(Prefix + Database);
+		Conn = sqlite3.connect(PREFIX + DATABASE);
 		Index = Conn.cursor();
 		
 		#Data from form
@@ -21,18 +21,18 @@ def IEmployee():
 		LastIndex = 0;
 		SqlQuery = "";
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMEmp(CMDepID,CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMEmp(CMDepID,CMActiv) \
 		VALUES \
 		(?,?)";
 		Index.execute(SqlQuery,(EmpDep,1));
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMEmpInf(CMEmpID,CMEmpName,CMBirthDate,CMCity,CMCivCode,CMAvail,CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMEmpInf(CMEmpID,CMEmpName,CMBirthDate,CMCity,CMCivCode,CMAvail,CMActiv) \
 		VALUES \
 		(?,?,?,?,?,?,?)";
 		Index.execute(SqlQuery,(LastIndex,EmpName,BDay,EmpCity,EmpCivilCode,EmpAvail,1));
 		LastIndex = Index.lastrowid;
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMEmpSal(CMEmpID,CMIncome,CMDateC,CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMEmpSal(CMEmpID,CMIncome,CMDateC,CMActiv) \
 		VALUES \
 		(?,?,?,?)";
 		Index.execute(SqlQuery,(LastIndex,EmpSal,EmpSalDateS,1));

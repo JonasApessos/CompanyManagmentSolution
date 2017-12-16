@@ -1,6 +1,6 @@
 from flask import request
 import sqlite3
 
-Database = "CompanyManagmentDB.db";
-Prefix = "RE1201";
-Prefix += "_" ;
+DATABASE = "CompanyManagmentDB.db";
+PREFIX = "RE1201";
+PREFIX += "_" ;

@@ -9,11 +9,13 @@ from CMApp.modules.InsertMechanism.InsertCompany import ICompany
 from CMApp.modules.InsertMechanism.InsertTask import ITask
 from CMApp.modules.InsertMechanism.InsertEmployee import IEmployee
 
-from CMApp.modules.GetMechanism.GetTaskFormData import GetFormAssignProject
-from CMApp.modules.GetMechanism.GetEmpFormData import GetFormDepartment
+from CMApp.modules.GetMechanism.GetTaskForm import GetFormAssignProject
+from CMApp.modules.GetMechanism.GetEmpForm import GetFormDepartment
 from CMApp.modules.GetMechanism.GetProjects import GetProjectList
-from CMApp.modules.GetMechanism.GetTaskData import GetProjectTaskData
+from CMApp.modules.GetMechanism.GetTask import GetProjectTask
+from CMApp.modules.GetMechanism.GetTask import GetProjectTaskDep
+from CMApp.modules.GetMechanism.GetContract import GetContractList
 
-Database = "CompanyManagmentDB.db";
-Prefix = "RE1201";
-Prefix += "_" ;
+DATABASE = "CompanyManagmentDB.db";
+PREFIX = "RE1201";
+PREFIX += "_" ;

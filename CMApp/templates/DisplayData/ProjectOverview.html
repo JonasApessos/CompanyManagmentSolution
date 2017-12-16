@@ -14,7 +14,9 @@
 				<h4>Due Date: <h4><h5>{{ row['CMDueDate'] }}</h5>
 				<h4>Project Start: </h4><h5>{{ row['CMDateS'] }}</h5>
 				<input type="hidden" value="{{row['CMProjID']}}" name="ProjID"></input>
-				<p><input type="submit" value="Load Project"/></p>
+				<p><input type="submit" value="Load" name="ProjLoad"/></p>
+				<p><input type="submit" value="Edit" name="ProjEdit"/></p>
+				<p><input type="submit" value="Delete" name="ProjDel"/></p>
 			</form>
 			{% endfor %}
 		</div>

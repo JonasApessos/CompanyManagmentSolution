@@ -6,7 +6,7 @@ def ICompany():
 	
 	if request.method == "POST":
 		
-		Conn = sqlite3.connect(Prefix + Database);
+		Conn = sqlite3.connect(PREFIX + DATABASE);
 		Index = Conn.cursor();
 		
 		CompName = request.form["CompName"];
@@ -18,7 +18,7 @@ def ICompany():
 		LastIndex = 0;
 		SqlQuery = "";
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMComp(CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMComp(CMActiv) \
 		VALUES \
 		(?)";
 		
@@ -26,7 +26,7 @@ def ICompany():
 		
 		LastIndex = Index.lastrowid;
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMCompInf(CMCompID,CMCompName,CMDateC,CMLocation,CMLocInterest,CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMCompInf(CMCompID,CMCompName,CMDateC,CMLocation,CMLocInterest,CMActiv) \
 		VALUES \
 		(?,?,?,?,?,?)";
 		

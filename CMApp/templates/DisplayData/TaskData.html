@@ -5,17 +5,25 @@
 	
 	<body>
 		<div>
-			{% for row in rows %}
-			<h2>{{row['CMName']}}</h2>
+			{% for rowdata in taskrows %}
+			<h1>{{rowdata['CMName']}}</h1>
 			<form action="" method="POST">
-				<div><h3>Task ID</h3><h4>{{row['CMTaskID']}}</h4></div>
-				<div><h3>Positive </h3><h4>{{row['CMPos']}}</h4></div>
-				<div><h3>Negative </h3><h4>{{row['CMNeg']}}</h4></div>
-				<div><h3>Normal </h3><h4>{{row['CMNorm']}}</h4></div>
-				<div><h3>Variance </h3><h4>{{row['CMVar']}}</h4></div>
-				<div><h3>Expectated </h3><h4>{{row['CMExp']}}</h4></div>
-				<div><h3>Months </h3><h4>{{row['CMMonth']}}</h4></div>
-				<div><h3>Date Created </h3><h4>{{row['CMDateC']}}</h4></div>
+				<div><h3>Task ID</h3><h4>{{rowdata['CMTaskID']}}</h4></div>
+				<div><h3>Positive </h3><h4>{{rowdata['CMPos']}}</h4></div>
+				<div><h3>Negative </h3><h4>{{rowdata['CMNeg']}}</h4></div>
+				<div><h3>Normal </h3><h4>{{rowdata['CMNorm']}}</h4></div>
+				<div><h3>Variance </h3><h4>{{rowdata['CMVar']}}</h4></div>
+				<div><h3>Expectated </h3><h4>{{rowdata['CMExp']}}</h4></div>
+				<div><h3>Months </h3><h4>{{rowdata['CMMonth']}}</h4></div>
+				<div><h3>Date Created </h3><h4>{{rowdata['CMDateC']}}</h4></div>
+				<div>
+					<h2>Dependancys<h2>
+					{% for rowdep in taskdeprows %}
+					{% if rowdep['CMTaskID'] == rowdata['CMTaskID'] %}
+					<div><h3>-TY{{rowdep['CMDep']}} </h3></div>
+					{% endif %}
+					{%  endfor %}
+				</div>
 			</form>
 			{% endfor %}
 		</div>

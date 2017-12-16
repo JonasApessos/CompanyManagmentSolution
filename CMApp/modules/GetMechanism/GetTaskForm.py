@@ -2,7 +2,7 @@ from . import *
 
 def GetFormAssignProject():
 	
-	Conn = sqlite3.connect(Prefix + Database);
+	Conn = sqlite3.connect(PREFIX + DATABASE);
 	Conn.row_factory = sqlite3.Row;
 	
 	Index = Conn.cursor();
@@ -12,14 +12,14 @@ def GetFormAssignProject():
 	#Queries
 	SqlScript = " \
 	SELECT \
-	"+Prefix+"CMContrInf.CMProdName, \
-	"+Prefix+"CMProj.CMProjID \
+	"+PREFIX+"CMContrInf.CMProdName, \
+	"+PREFIX+"CMProj.CMProjID \
 	\
 	FROM \
-	"+Prefix+"CMContrInf, \
-	"+Prefix+"CMProj \
+	"+PREFIX+"CMContrInf, \
+	"+PREFIX+"CMProj \
 	\
-	WHERE ("+Prefix+"CMContrInf.CMContrID = "+Prefix+"CMProj.CMContrID)";
+	WHERE ("+PREFIX+"CMContrInf.CMContrID = "+PREFIX+"CMProj.CMContrID)";
 	
 	Index.execute(SqlScript);
 	

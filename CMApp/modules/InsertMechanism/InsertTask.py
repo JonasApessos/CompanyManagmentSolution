@@ -4,7 +4,7 @@ def ITask():
 	
 	if request.method == "POST":
 		
-		Conn = sqlite3.connect(Prefix + Database);
+		Conn = sqlite3.connect(PREFIX + DATABASE);
 		Index = Conn.cursor();
 		
 		#Data from form
@@ -23,7 +23,7 @@ def ITask():
 		LastIndex = 0;
 		SqlQuery = "";
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMTask(CMProjID,CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMTask(CMProjID,CMActiv) \
 		VALUES \
 		(?,?)";
 		
@@ -31,7 +31,7 @@ def ITask():
 		
 		LastIndex = Index.lastrowid;
 		
-		SqlQuery = "INSERT INTO " + Prefix + "CMTaskInf(CMTaskID,CMName,CMPos,CMNorm,CMNeg,CMExp,CMVar,CMMonth,CMDateC,CMActiv) \
+		SqlQuery = "INSERT INTO " + PREFIX + "CMTaskInf(CMTaskID,CMName,CMPos,CMNorm,CMNeg,CMExp,CMVar,CMMonth,CMDateC,CMActiv) \
 		VALUES \
 		(?,?,?,?,?,?,?,?,?,?)";
 		
