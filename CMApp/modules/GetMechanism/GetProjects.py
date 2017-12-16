@@ -1,11 +1,8 @@
-from . import *
+from .__init__ import *
 
-def GetProjectList():
-	
-	Conn = sqlite3.connect(PREFIX + DATABASE);
-	Conn.row_factory = sqlite3.Row;
-	
-	Index = Conn.cursor();
+def GetProjectContractList():
+
+	Conn = DatabaseQuery(PREFIX, DATABASE);
 	
 	SqlScript = " \
 	SELECT \
@@ -28,14 +25,63 @@ def GetProjectList():
 	AND \
 	("+PREFIX+"CMProj.CMActiv = 1);";
 	
-	Index.execute(SqlScript);
+	Conn.SetSqlScript(SqlScript);
 	
-	Rows = Index.fetchall();
+	Rows = Conn.ExecQueryToRow();
 	
-	Conn.close();
+	Conn.CloseDatabase();
 	
-	Conn = None;
-	Index = None;
-	SqlScript = None;
+	return Rows;
+	
+	
+	
+def GetProjectListByID(ProjID):
+	
+	Conn = DatabaseQuery(PREFIX, DATABASE);
+	
+	SqlScript = " \
+	SELECT \
+	"+PREFIX+"CMProj.CMProjID, \
+	"+PREFIX+"CMProj.CMContrID, \
+	"+PREFIX+"CMProj.CMCompID, \
+	"+PREFIX+"CMProj.CMDepID \
+	\
+	FROM \
+	"+PREFIX+"CMProj \
+	WHERE \
+	("+PREFIX+"CMProj.CMProjID = "+str(ProjID)+") \
+	AND \
+	("+PREFIX+"CMProj.CMActiv = 1)";
+	
+	Conn.SetSqlScript(SqlScript);
+	
+	Rows = Conn.ExecQueryToRow();
+	
+	Conn.CloseDatabase();
+	
+	return Rows;
+	
+def GetProjectList():
+	
+	Conn = DatabaseQuery(PREFIX, DATABASE);
+	
+	SqlScript = " \
+	SELECT \
+	"+PREFIX+"CMProj.CMProjID, \
+	"+PREFIX+"CMProj.CMContrID, \
+	"+PREFIX+"CMProj.CMCompID, \
+	"+PREFIX+"CMProj.CMDepID \
+	\
+	FROM \
+	"+PREFIX+"CMProj \
+	WHERE \
+	("+PREFIX+"CMProj.CMActiv = 1)";
+	
+	
+	Conn.SetSqlScript(SqlScript);
+	
+	Rows = Conn.ExecQueryToRow();
+
+	Conn.CloseDatabase();
 	
 	return Rows;

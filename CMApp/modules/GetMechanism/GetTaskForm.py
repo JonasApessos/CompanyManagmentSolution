@@ -1,13 +1,8 @@
-from . import *
+from .__init__ import *
 
 def GetFormAssignProject():
 	
-	Conn = sqlite3.connect(PREFIX + DATABASE);
-	Conn.row_factory = sqlite3.Row;
-	
-	Index = Conn.cursor();
-	
-	Rows = 0;
+	Conn = DatabaseQuery(PREFIX, DATABASE);
 	
 	#Queries
 	SqlScript = " \
@@ -21,15 +16,10 @@ def GetFormAssignProject():
 	\
 	WHERE ("+PREFIX+"CMContrInf.CMContrID = "+PREFIX+"CMProj.CMContrID)";
 	
-	Index.execute(SqlScript);
+	Conn.SetSqlScript(SqlScript);
 	
-	Rows = Index.fetchall();
+	Rows = Conn.ExecQueryToRow();
 	
-	Conn.close();
-	
-	#nothing to see heir, just taking out my garbages
-	Conn = None;
-	Index = None;
-	SqlScript = None;
+	Conn.CloseDatabase();
 	
 	return Rows;

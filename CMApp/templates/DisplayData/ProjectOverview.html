@@ -5,15 +5,15 @@
 	<body>
 		<h3>Project</h3>
 		<div>
-			{% for row in rows %}
-			<form action="{{url_for('ProjOvervLoad')}}" method="POST">
-				<h3>{{ row['CMProdName'] }}</h3>
-				<h4>Project ID: </h4><h5>{{ row['CMProjID'] }}</h5>
-				<h4>Assigned Company: </h4><h5>{{ row['CMCompName'] }}</h5>
-				<h4>Contractor: </h4><h5>{{ row['CMContractor'] }}</h5>
-				<h4>Due Date: <h4><h5>{{ row['CMDueDate'] }}</h5>
-				<h4>Project Start: </h4><h5>{{ row['CMDateS'] }}</h5>
-				<input type="hidden" value="{{row['CMProjID']}}" name="ProjID"></input>
+			{% for ProjRow in ProjRows %}
+			<form action="{{url_for('projb.ProjOvervLoad')}}" method="POST">
+				<h3>{{ProjRow['CMProdName']}}</h3>
+				<h4>Project ID: </h4><h5>{{ProjRow['CMProjID']}}</h5>
+				<h4>Assigned Company: </h4><h5>{{ProjRow['CMCompName']}}</h5>
+				<h4>Contractor: </h4><h5>{{ProjRow['CMContractor']}}</h5>
+				<h4>Due Date: <h4><h5>{{ProjRow['CMDueDate']}}</h5>
+				<h4>Project Start: </h4><h5>{{ProjRow['CMDateS']}}</h5>
+				<input type="hidden" value="{{ProjRow['CMProjID']}}" name="ProjID"></input>
 				<p><input type="submit" value="Load" name="ProjLoad"/></p>
 				<p><input type="submit" value="Edit" name="ProjEdit"/></p>
 				<p><input type="submit" value="Delete" name="ProjDel"/></p>

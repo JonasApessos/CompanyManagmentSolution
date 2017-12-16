@@ -1,10 +1,4 @@
-from CMApp import *
-
-#PYTHONDONTWRITEBYTECODE=1;
-#PYTHONMALLOCSTATS=1;
-#from flask import Flask, request, render_template, redirect, url_for	
-#app = Flask(__name__);
-
+from __init__ import *
 
 #//=======================<Index Functions>=======================//
 def index():
@@ -16,7 +10,7 @@ app.add_url_rule("/","index",index);
 	
 	
 #//=======================<Employee Functions>=======================//
-def EmpForm():
+"""def EmpForm():
 	
 	TableRows = GetFormDepartment();
 
@@ -29,13 +23,13 @@ def Employee():
 	IEmployee();
 		
 	#render html
-	return redirect(url_for("EmpForm"));
-app.add_url_rule("/Forms/EmployeeForm","Employee",Employee,methods = ["POST"]);
+	return redirect(url_for("EmpForm"),code=302);
+app.add_url_rule("/Forms/EmployeeForm","Employee",Employee,methods = ["POST"]);"""
 #//===============================================================//
 
 	
 	
-#//=======================<Task Functions>=======================//
+"""#//=======================<Task Functions>=======================//
 def TaskForm():
 
 	TableRows = GetFormAssignProject();
@@ -48,29 +42,32 @@ def Task():
 	
 	ITask();
 		
-	#render html
-	return redirect(url_for("TaskForm"));
-app.add_url_rule("/Forms/TaskForm","Task",Task,methods=["POST"]);
+	return redirect(url_for("TaskForm"),code=302);
+app.add_url_rule("/Forms/TaskForm","Task",Task,methods=["POST"]);"""
 
-def TaskDisplay():
+"""def TaskDisplay():
 	if request.method == "POST":
 	
-		ID = str(request.form['ProjID']);
-	
-		TaskRows = GetProjectTask(ID);
-		
-		TaskDepRows = GetProjectTaskDep(ID);
+		if "ProjID" in session:
 			
-		return render_template("DisplayData/TaskData.html",taskrows = TaskRows,taskdeprows = TaskDepRows );
-app.add_url_rule("/DisplayData/TaskData","TaskDisplay",TaskDisplay,methods=["POST"]);
+			TaskRows = GetProjectTask(session["ProjID"]);
+		
+			TaskDepRows = GetProjectTaskDep(session["ProjID"]);
+		
+			#render html
+			return render_template("DisplayData/TaskData.html",taskrows = TaskRows,taskdeprows = TaskDepRows );
+		
+	return redirect(url_for("ProjOverv"),code=302);
+app.add_url_rule("/DisplayData/TaskData","TaskDisplay",TaskDisplay,methods=["POST"]);"""
 	
 #//===============================================================//
 	
 	
 	
 #//=======================<Company Functions>=======================//
-def CompForm():
+"""def CompForm():
 
+	#render html
 	return render_template("Forms/CompanyForm.html");
 app.add_url_rule("/Forms/CompanyForm","CompForm",CompForm);
 
@@ -78,15 +75,15 @@ def Company():
 	
 	ICompany();
 		
-	#render html
-	return redirect(url_for("CompForm"));
-app.add_url_rule("/Forms/CompanyForm","Company",Company,methods=["POST"]);
+	return redirect(url_for("CompForm"),code=302);
+app.add_url_rule("/Forms/CompanyForm","Company",Company,methods=["POST"]);"""
 #//===============================================================//
 		
 		
 	
 #//=======================<Contract Functions>=======================//
-def ContrForm():
+"""def ContrForm():
+
 	#render html
 	return render_template("Forms/ContractForm.html");
 app.add_url_rule("/Forms/ContractForm","ContrForm",ContrForm);
@@ -95,55 +92,78 @@ def Contract():
 
 	IContract();
 
-	return redirect(url_for("ContractForm"));
-app.add_url_rule("/Forms/ContractForm","Contract",Contract,methods=["POST"]);
+	return redirect(url_for("ContractForm"), code=302);
+app.add_url_rule("/Forms/ContractForm","Contract",Contract,methods=["POST"]);"""
 #//===============================================================//
 		
 
 #//=======================<Project Functions>=======================//
-def ProjOverv():
+"""def ProjOverv():
 
-	TableRows = GetProjectList();
+	ProjectRows = GetProjectContractList();
 
 	#render html
-	return render_template("DisplayData/ProjectOverview.html",rows = TableRows);
+	return render_template("DisplayData/ProjectOverview.html",ProjRows = ProjectRows);
 app.add_url_rule("/DisplayData/ProjectOverview","ProjOverv",ProjOverv);	
 
 def ProjEdit():
 	if request.method == "POST":
-		ID = request.form['ProjID'];
-		ContractRows = GetContractList();
-		ProjectContractRows = GetContractListByProject(ID);
 	
-		return render_template("Forms/ProjectEditForm.html", ContrRows = ContractRows, ProjContrRows = ProjectContractRows);
-		
+		if "ProjID" in session:
+
+			ProjectRows = GetProjectListByID(session['ProjID']);
+			ContractRows = GetContractList();
+			CompanyRows = GetCompanyList();
+			DepartmentRows = GetDepartmentList();
+			
+			#render html
+			return render_template("Forms/ProjectEditForm.html", ContrRows = ContractRows, ProjRows = ProjectRows, CompRows = CompanyRows, DepRows = DepartmentRows);
+	return redirect(url_for("ProjOverv"), code=302);
 app.add_url_rule("/Forms/ProjectEditForm","ProjEdit",ProjEdit,methods=["POST"]);
 
+def ProjDel():
+
+	if request.method == "POST":
+	
+		if "ProjID" in session:
+		
+			SetProjectIsActiv(str(session['ProjID']),"0");
+	
+	return redirect(url_for("ProjOverv"),code=302);	
+app.add_url_rule("/ProjectDelete","ProjDel",ProjDel,methods=["POST"]);
+
+app.secret_key="70012";
 def ProjOvervLoad():
 
 	if request.method=="POST":
-
-		if "ProjLoad" in request.form:#if submit was ProjLoad then start project load methods
 		
-			return redirect(url_for("TaskDisplay"),code=307);
-			
-		elif "ProjEdit" in request.form:#if submit was ProjEdit the start project edit methods
+		if "ProjID" in request.form:
 		
-			return redirect(url_for("ProjEdit"),code=307);
+			session['ProjID'] = request.form['ProjID'];
 			
-		elif "ProjDel" in request.form:#if submit was ProjDel then Set del to query flag
+			if "ProjLoad" in request.form:#if submit was ProjLoad then start project load methods
 		
-			ID = request.form['ProjID'];
-			SetProjectIsActiv(str(ID),"0");
+				return redirect(url_for("TaskDisplay"), code=307);
 			
-			return redirect(url_for("ProjOverv"));	
+			elif "ProjEdit" in request.form:#if submit was ProjEdit the start project edit methods
+		
+				return redirect(url_for("ProjEdit"), code=307);
 			
-app.add_url_rule("/DisplayData/ProjectOverview","ProjOvervLoad",ProjOvervLoad,methods=["POST"]);
+			elif "ProjDel" in request.form:#if submit was ProjDel then Set del to query flag
+			
+				return redirect(url_for("ProjDel"), code=307);	
+		
+			else:
+				return "There was an unknown error, please try again"
+					
+		else:
+			return "There was an unknown error, Please try again";
+app.add_url_rule("/DisplayData/ProjectOverview","ProjOvervLoad",ProjOvervLoad,methods=["POST"]);"""
 #//===============================================================//
 		
 
 #//=======================<Main Functions>=======================//
 if __name__ == '__main__':
 
-	app.run(debug = True,port=80);
+	app.run(debug = DEBUG,port=PORT);
 #//===============================================================//

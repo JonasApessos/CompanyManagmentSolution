@@ -1,11 +1,8 @@
-from . import *
+from .__init__ import *
 
 def GetEmpRowData():
 	
-	Conn = sqlite3.connection(PREFIX + DATABASE);
-	Conn.row_factory = sqlite3.Row;
-	
-	Index = Conn.cursor();
+	Conn = DatabaseQuery(PREFIX, DATABASE);
 	
 	SqlScript = " \
 	SELECT \
@@ -29,13 +26,11 @@ def GetEmpRowData():
 	AND "+PREFIX+"CMEmpInf.CMEmpID = "+PREFIX+"CMEmpSal.CMEmpID) \
 	AND ("+PREFIX+"CMEmp.CMDepID = "+PREFIX+"CMDep.CMDepID);";
 	
-	Index = Conn.execute(SqlScript);
+	Conn.SetSqlScript(SqlScript);
 	
-	Rows = Index.fetchall();
+	Rows = Conn.ExecQueryToRow();
 	
-	Conn = 0;
-	Index = 0;
-	SqlScript = 0;
+	Conn.CloseDatabase();
 	
 	return Rows;
 	

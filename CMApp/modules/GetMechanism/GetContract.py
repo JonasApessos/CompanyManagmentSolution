@@ -1,11 +1,8 @@
-from . import *
+from .__init__ import *
 
 def GetContractList():
 
-	Conn = sqlite3.connect(PREFIX + DATABASE);
-	Conn.row_factory = sqlite3.Row;
-	
-	Index = Conn.cursor();
+	Conn = DatabaseQuery(PREFIX, DATABASE);
 	
 	SqlScript = " \
 	SELECT \
@@ -19,24 +16,18 @@ def GetContractList():
 	WHERE \
 	("+PREFIX+"CMContr.CMContrID = "+PREFIX+"CMContrInf.CMContrID);";
 	
-	Index.execute(SqlScript);
 	
-	Rows = Index.fetchall();
+	Conn.SetSqlScript(SqlScript);
 	
-	Conn.close();
+	Rows = Conn.ExecQueryToRow();
 	
-	Conn = None;
-	Index = None;
-	SqlScript = None;
+	Conn.CloseDatabase();
 	
 	return Rows;
 	
 def GetContractListByProject(ProjID):
-
-	Conn = sqlite3.connect(PREFIX + DATABASE);
-	Conn.row_factory = sqlite3.Row;
 	
-	Index = Conn.cursor();
+	Conn = DatabaseQuery(PREFIX, DATABASE);
 	
 	SqlScript = " \
 	SELECT \
@@ -55,14 +46,10 @@ def GetContractListByProject(ProjID):
 	AND \
 	("+PREFIX+"CMProj.CMProjID = "+str(ProjID)+");";
 	
-	Index.execute(SqlScript);
+	Conn.SetSqlScript(SqlScript);
 	
-	Rows = Index.fetchall();
+	Rows = Conn.ExecQueryToRow();
 	
-	Conn.close();
-	
-	Conn = None;
-	Index = None;
-	SqlScript = None;
+	Conn.CloseDatabase();
 	
 	return Rows;

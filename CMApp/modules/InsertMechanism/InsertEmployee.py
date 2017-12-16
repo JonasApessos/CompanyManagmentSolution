@@ -1,4 +1,4 @@
-from . import *
+from .__init__ import *
 
 def IEmployee():
 	if request.method == "POST":
@@ -19,23 +19,23 @@ def IEmployee():
 		
 		#Queries
 		LastIndex = 0;
-		SqlQuery = "";
+		SqlScript = "";
 		
-		SqlQuery = "INSERT INTO " + PREFIX + "CMEmp(CMDepID,CMActiv) \
+		SqlScript = "INSERT INTO " + PREFIX + "CMEmp(CMDepID,CMActiv) \
 		VALUES \
 		(?,?)";
-		Index.execute(SqlQuery,(EmpDep,1));
+		Index.execute(SqlScript,(EmpDep,1));
 		
-		SqlQuery = "INSERT INTO " + PREFIX + "CMEmpInf(CMEmpID,CMEmpName,CMBirthDate,CMCity,CMCivCode,CMAvail,CMActiv) \
+		SqlScript = "INSERT INTO " + PREFIX + "CMEmpInf(CMEmpID,CMEmpName,CMBirthDate,CMCity,CMCivCode,CMAvail,CMActiv) \
 		VALUES \
 		(?,?,?,?,?,?,?)";
-		Index.execute(SqlQuery,(LastIndex,EmpName,BDay,EmpCity,EmpCivilCode,EmpAvail,1));
+		Index.execute(SqlScript,(LastIndex,EmpName,BDay,EmpCity,EmpCivilCode,EmpAvail,1));
 		LastIndex = Index.lastrowid;
 		
-		SqlQuery = "INSERT INTO " + PREFIX + "CMEmpSal(CMEmpID,CMIncome,CMDateC,CMActiv) \
+		SqlScript = "INSERT INTO " + PREFIX + "CMEmpSal(CMEmpID,CMIncome,CMDateC,CMActiv) \
 		VALUES \
 		(?,?,?,?)";
-		Index.execute(SqlQuery,(LastIndex,EmpSal,EmpSalDateS,1));
+		Index.execute(SqlScript,(LastIndex,EmpSal,EmpSalDateS,1));
 		
 		Conn.commit();
 		Conn.close();

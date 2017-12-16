@@ -109,6 +109,7 @@ SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMProj \
 	CMDepID INTEGER, \
 	CMCompID INTEGER, \
 	CMActiv INTEGERS NOT NULL DEFAULT 0, \
+	CMDateC DATE NOT NULL DEFAULT (DATETIME('now')), \
 	FOREIGN KEY(CMContrID) REFERENCES " + Prefix + "CMContr(CMContrID), \
 	FOREIGN KEY(CMDepID) REFERENCES " + Prefix + "CMDep(CMDepID), \
 	FOREIGN KEY(CMCompID) REFERENCES " + Prefix + "CMComp(CMCompID) \
@@ -169,7 +170,7 @@ SqlScript = "CREATE TABLE IF NOT EXISTS " + Prefix + "CMDepInf \
 ( \
 	CMDepInfID INTEGER PRIMARY KEY AUTOINCREMENT, \
 	CMDepID INTEGER, \
-	CMName TEXT NOT NULL DEFAULT 'MISSING FIELD', \
+	CMDepName TEXT NOT NULL DEFAULT 'MISSING FIELD', \
 	CMDateC DATETIME NOT NULL DEFAULT (DATETIME('now')), \
 	CMActiv INTEGERS NOT NULL DEFAULT 0, \
 	FOREIGN KEY(CMDepID) REFERENCES " + Prefix + "CMDep(CMDepID) \
@@ -282,10 +283,10 @@ if UserInput == 1:
 	(1);";
 	Conn.execute(SqlScript);
 	
-	SqlScript = "INSERT INTO " + Prefix + "CMDepInf(CMDepID,CMName,CMDateC,CMActiv) \
+	SqlScript = "INSERT INTO " + Prefix + "CMDepInf(CMDepID,CMDepName,CMDateC,CMActiv) \
 	VALUES \
 	(1,'Designers','2014-02-16',1), \
-	(2,'Programers','2015-07-01',1), \
+	(2,'Programmers','2015-07-01',1), \
 	(3,'Artist','2017-04-06',1);";
 	Conn.execute(SqlScript);
 	

@@ -1,11 +1,8 @@
-from . import *
+from .__init__ import *
 
 def GetTask():
 	
-	Conn = sqlite3.connect(PREFIX + DATABASE);
-	Conn.row_factory = sqlite3.Row;
-	
-	Index = Conn.cursor();
+	Conn = DatabaseQuery(PREFIX, DATABASE);
 	
 	SqlScript = " \
 	SELECT \
@@ -27,22 +24,17 @@ def GetTask():
 	WHERE ("+PREFIX+"CMTask.CMTaskInfID = "+PREFIX+"CMTaskInf.CMTaskInfID) \
 	AND ("+PREFIX+"CMTask.CMProjID = "+PREFIX+"CMProj.CMProjID)";
 	
-	Index.execute(SqlScript);
+	Conn.SetSqlScript(SqlScript);
 	
-	Rows = Index.fetchall();
+	Rows = Conn.ExecQueryToRow();
 	
-	Conn = None;
-	Index = None;
-	SqlScript = None;
+	Conn.CloseDatabase();
 	
 	return Rows;
 	
 def GetProjectTask(ProjectID):
 	
-	Conn = sqlite3.connect(PREFIX + DATABASE);
-	Conn.row_factory = sqlite3.Row;
-	
-	Index = Conn.cursor();
+	Conn = DatabaseQuery(PREFIX, DATABASE);
 	
 	SqlScript = " \
 	SELECT \
@@ -66,26 +58,21 @@ def GetProjectTask(ProjectID):
 	AND \
 	("+PREFIX+"CMTask.CMTaskID = "+PREFIX+"CMTaskInf.CMTaskID) \
 	AND \
-	("+PREFIX+"CMTask.CMProjID = "+ProjectID+") \
+	("+PREFIX+"CMTask.CMProjID = "+str(ProjectID)+") \
 	AND \
 	("+PREFIX+"CMTask.CMActiv = 1)";
 	
-	Index.execute(SqlScript);
+	Conn.SetSqlScript(SqlScript);
 	
-	Rows = Index.fetchall();
+	Rows = Conn.ExecQueryToRow();
 	
-	Conn = None;
-	Index = None;
-	SqlScript = None;
+	Conn.CloseDatabase();
 	
 	return Rows;
 	
 def GetProjectTaskDep(ProjectID):
 	
-	Conn = sqlite3.connect(PREFIX + DATABASE);
-	Conn.row_factory = sqlite3.Row;
-	
-	Index = Conn.cursor();
+	Conn = DatabaseQuery(PREFIX, DATABASE);
 	
 	SqlScript = " \
 	SELECT \
@@ -106,13 +93,12 @@ def GetProjectTaskDep(ProjectID):
 	AND \
 	("+PREFIX+"CMTask.CMActiv = 1)";
 	
-	Index.execute(SqlScript);
 	
-	Rows = Index.fetchall();
+	Conn.SetSqlScript(SqlScript);
 	
-	Conn = None;
-	Index = None;
-	SqlScript = None;
+	Rows = Conn.ExecQueryToRow();
+	
+	Conn.CloseDatabase();
 	
 	return Rows;
 	
