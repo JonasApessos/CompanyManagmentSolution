@@ -6,10 +6,17 @@
 	<form action = "" method="POST">
 		<h3>Select assigned Contract</h3>
 		<p>
-			<select>
-				<option value = "1">1</option>
-				<option value = "2">2</option>
-			</select>
+		<select name="ContrID">
+			{% for ContrRow in ContrRows %}
+				{% for ProjContrRow in ProjContrRows %}
+				{% if ProjContrRow['CMContrID'] == ContrRow['CMContrID'] %}
+				<option value = "{{ContrRow['CMContrID']}}" selected>{{ContrRow['CMProdName']}}</option>
+				{% else %}
+				<option value = "{{ContrRow['CMContrID']}}">{{ContrRow['CMProdName']}}</option>	
+				{% endif %}
+				{% endfor %}
+			{% endfor %}
+		</select>
 		</p>
 		<h3>Select assigned Company</h3>
 		<p>
@@ -19,7 +26,7 @@
 			</select>
 		</p>
 		<h3>Project Name</h3>
-		<p><input type="number" name="ProjName"/></p>
+		<p><input type="number" name="ProjName" value=""/></p>
 		<h3>Creation Date</h3>
 		<p><input type="number" name="CDate"/></p>
 		<p><input type="submit" value="submit"/></p>

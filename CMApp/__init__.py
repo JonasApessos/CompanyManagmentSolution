@@ -15,6 +15,9 @@ from CMApp.modules.GetMechanism.GetProjects import GetProjectList
 from CMApp.modules.GetMechanism.GetTask import GetProjectTask
 from CMApp.modules.GetMechanism.GetTask import GetProjectTaskDep
 from CMApp.modules.GetMechanism.GetContract import GetContractList
+from CMApp.modules.GetMechanism.GetContract import GetContractListByProject
+
+from CMApp.modules.UpdateMechanism.SetProject import SetProjectIsActiv
 
 DATABASE = "CompanyManagmentDB.db";
 PREFIX = "RE1201";

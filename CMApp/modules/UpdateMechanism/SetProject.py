@@ -4,7 +4,6 @@ def SetProject(ProjID):
 	
 	
 	Conn = sqlite3.connect(PREFIX + DATABASE);
-	#Conn.row_factory = sqlite3.Row;
 	
 	Index = Conn.cursor();
 	
@@ -24,10 +23,35 @@ def SetProject(ProjID):
 	
 	Rows = Index.fetchall();
 	
+	Conn.commit();
 	Conn.close();
 	
 	Conn = None;
 	Index = None;
 	SqlScript = None;
 	
-	return Rows;
+def SetProjectIsActiv(ProjID,Switch):
+	
+	
+	Conn = sqlite3.connect(PREFIX + DATABASE);
+	
+	Index = Conn.cursor();
+	
+	SqlScript = " \
+	UPDATE \
+	"+PREFIX+"CMProj \
+	\
+	SET \
+	CMActiv = "+Switch+" \
+	\
+	WHERE \
+	("+PREFIX+"CMProj.CMProjID = "+ProjID+");";
+	
+	Index.execute(SqlScript);
+	
+	Conn.commit();
+	Conn.close();
+	
+	Conn = None;
+	Index = None;
+	SqlScript = None;

@@ -24,7 +24,9 @@ def GetProjectList():
 	WHERE \
 	("+PREFIX+"CMProj.CMCompID = "+PREFIX+"CMCompInf.CMCompID) \
 	AND \
-	("+PREFIX+"CMProj.CMContrID = "+PREFIX+"CMContrInf.CMContrID)";
+	("+PREFIX+"CMProj.CMContrID = "+PREFIX+"CMContrInf.CMContrID) \
+	AND \
+	("+PREFIX+"CMProj.CMActiv = 1);";
 	
 	Index.execute(SqlScript);
 	

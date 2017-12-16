@@ -9,15 +9,51 @@ def GetContractList():
 	
 	SqlScript = " \
 	SELECT \
-	RE1201_CMContrInf.CMProdName, \
-	RE1201_CMContrInf.CMContrID \
+	"+PREFIX+"CMContrInf.CMProdName, \
+	"+PREFIX+"CMContrInf.CMContrID \
     \
 	FROM \
-	RE1201_CMContrInf, \
-	RE1201_CMContr \
+	"+PREFIX+"CMContrInf, \
+	"+PREFIX+"CMContr \
     \
 	WHERE \
-	(RE1201_CMContr.CMContrID = RE1201_CMContrInf.CMContrID)";
+	("+PREFIX+"CMContr.CMContrID = "+PREFIX+"CMContrInf.CMContrID);";
+	
+	Index.execute(SqlScript);
+	
+	Rows = Index.fetchall();
+	
+	Conn.close();
+	
+	Conn = None;
+	Index = None;
+	SqlScript = None;
+	
+	return Rows;
+	
+def GetContractListByProject(ProjID):
+
+	Conn = sqlite3.connect(PREFIX + DATABASE);
+	Conn.row_factory = sqlite3.Row;
+	
+	Index = Conn.cursor();
+	
+	SqlScript = " \
+	SELECT \
+	"+PREFIX+"CMContrInf.CMProdName, \
+	"+PREFIX+"CMContrInf.CMContrID \
+    \
+	FROM \
+	"+PREFIX+"CMContrInf, \
+	"+PREFIX+"CMContr, \
+	"+PREFIX+"CMProj \
+    \
+	WHERE \
+	("+PREFIX+"CMContr.CMContrID = "+PREFIX+"CMContrInf.CMContrID) \
+	AND \
+	("+PREFIX+"CMProj.CMContrID = "+PREFIX+"CMContr.CMContrID) \
+	AND \
+	("+PREFIX+"CMProj.CMProjID = "+str(ProjID)+");";
 	
 	Index.execute(SqlScript);
 	

@@ -52,7 +52,7 @@ def Task():
 	return redirect(url_for("TaskForm"));
 app.add_url_rule("/Forms/TaskForm","Task",Task,methods=["POST"]);
 
-def DisplayTask():
+def TaskDisplay():
 	if request.method == "POST":
 	
 		ID = str(request.form['ProjID']);
@@ -62,7 +62,7 @@ def DisplayTask():
 		TaskDepRows = GetProjectTaskDep(ID);
 			
 		return render_template("DisplayData/TaskData.html",taskrows = TaskRows,taskdeprows = TaskDepRows );
-app.add_url_rule("/DisplayData/TaskData","DisplayTask",DisplayTask,methods=["POST"]);
+app.add_url_rule("/DisplayData/TaskData","TaskDisplay",TaskDisplay,methods=["POST"]);
 	
 #//===============================================================//
 	
@@ -109,25 +109,35 @@ def ProjOverv():
 	return render_template("DisplayData/ProjectOverview.html",rows = TableRows);
 app.add_url_rule("/DisplayData/ProjectOverview","ProjOverv",ProjOverv);	
 
-def ProjEditTest():
+def ProjEdit():
+	if request.method == "POST":
+		ID = request.form['ProjID'];
+		ContractRows = GetContractList();
+		ProjectContractRows = GetContractListByProject(ID);
 	
-	return render_template("Forms/ProjectEditForm.html");
-app.add_url_rule("/Forms/ProjectEditForm","ProjEditTest",ProjEditTest,methods=["POST"]);
+		return render_template("Forms/ProjectEditForm.html", ContrRows = ContractRows, ProjContrRows = ProjectContractRows);
+		
+app.add_url_rule("/Forms/ProjectEditForm","ProjEdit",ProjEdit,methods=["POST"]);
 
 def ProjOvervLoad():
+
 	if request.method=="POST":
-	
-		print("first");
+
 		if "ProjLoad" in request.form:#if submit was ProjLoad then start project load methods
-			print("fuck you1");
-			return redirect(url_for("DisplayTask"),code=307);	
-		elif "ProjEdit" in request.form:#if submit was ProjEdit the start project edit methods
-			return redirect(url_for("ProjEditTest"),code=307);
-		elif "ProjDel" in request.form:#if submit was ProjDel then Set del to query flag
-			return "Not yet implemented";
 		
-	
-	#return render_template("DisplayData/TaskData.html",taskrows = TaskRows,taskdeprows = TaskDepRows );
+			return redirect(url_for("TaskDisplay"),code=307);
+			
+		elif "ProjEdit" in request.form:#if submit was ProjEdit the start project edit methods
+		
+			return redirect(url_for("ProjEdit"),code=307);
+			
+		elif "ProjDel" in request.form:#if submit was ProjDel then Set del to query flag
+		
+			ID = request.form['ProjID'];
+			SetProjectIsActiv(str(ID),"0");
+			
+			return redirect(url_for("ProjOverv"));	
+			
 app.add_url_rule("/DisplayData/ProjectOverview","ProjOvervLoad",ProjOvervLoad,methods=["POST"]);
 #//===============================================================//
 		
