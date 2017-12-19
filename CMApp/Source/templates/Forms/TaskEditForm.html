@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	{% for TaskDataRow in TaskDataRows %}
+	<form action = "{{url_for('taskb.UpdateTask')}}" method="POST">
+		<h3>Task Name:</h3>
+		<div><input type="text" name="TaskName" value="{{TaskDataRow['CMName']}}"/></div>
+		
+		<h3>Assigned project</h3>
+		<div>
+			<select name="ProjOption">
+				{% for ProjRow in ProjRows %}
+					{% for ContrRow in ContrRows %}
+						{% if ProjRow['CMContrID'] == ContrRow['CMContrID'] %}
+							{% if TaskDataRow['CMProjID'] == ProjRow['CMProjID']%}
+								<option value="{{ProjRow['CMProjID']}}" selected>{{ContrRow['CMProdName']}}</option>
+							{% else %}
+								<option value="{{ProjRow['CMProjID']}}">{{ContrRow['CMProdName']}}</option>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			</select>
+		</div>
+		
+		<h3>Positive prediction</h3>
+		<div><input type="number" name="PosPre"value="{{TaskDataRow['CMPos']}}"/></div>
+		
+		<h3>Normal prediction</h3>
+		<div><input type="number" name="NormPre" value="{{TaskDataRow['CMNorm']}}"/></div>
+		
+		<h3>Negative Prediction</h3>
+		<div><input type="number" name="NegPre" value="{{TaskDataRow['CMNeg']}}"/></div>
+		
+		<h3>Months</h3>
+		<div><input type="number" name="Months" value="{{TaskDataRow['CMMonth']}}"/></div>
+		
+		<!--<h3>Dependency</h3>
+		<div>
+			{% for TaskRow in TaskRows %}
+				{% for TaskDepRow in TaskDepRows %}
+					{% if TaskDepRow['CMTaskID'] == TaskRow['CMTaskID'] and  TaskDataRow['CMTaskID'] != TaskDepRow['CMTaskID'] %}
+						{% if TaskDepRow['CMDep'] != TaskDataRow['CMTaskID'] %}
+							<div><input type="checkbox" name="TaskDep" value="{{TaskRow['CMTaskID']}}" checked><h4>TY{{TaskRow['CMTaskID']}}</h4></div>
+						{% else %}
+							<div><input type="checkbox" name="TaskDep" value="{{TaskRow['CMTaskID']}}"><h4>TY{{TaskRow['CMTaskID']}}</h4></div>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
+		</div>-->
+		
+		<div><input type="submit" value="submit"/></div>
+	</form>
+	{% endfor %}
+	<a href="{{url_for('projb.ProjOverv')}}">Back</a>
+</body>
+</html>

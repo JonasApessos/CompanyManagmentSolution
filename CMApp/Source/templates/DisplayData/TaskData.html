@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	
+	<body>
+		<div>
+			{% for taskrow in taskrows %}
+			<h1>{{taskrow['CMName']}}</h1>
+			<form action="{{url_for('taskb.TaskLoad')}}" method="POST">
+				<div><h3>Task ID</h3><h4>{{taskrow['CMTaskID']}}</h4></div>
+				<div><h3>Positive </h3><h4>{{taskrow['CMPos']}}</h4></div>
+				<div><h3>Negative </h3><h4>{{taskrow['CMNeg']}}</h4></div>
+				<div><h3>Normal </h3><h4>{{taskrow['CMNorm']}}</h4></div>
+				<div><h3>Variance </h3><h4>{{taskrow['CMVar']}}</h4></div>
+				<div><h3>Expectated </h3><h4>{{taskrow['CMExp']}}</h4></div>
+				<div><h3>Months </h3><h4>{{taskrow['CMMonth']}}</h4></div>
+				<div><h3>Date Created </h3><h4>{{taskrow['CMDateC']}}</h4></div>
+				<div>
+					<h2>Dependancys<h2>
+					{% for taskdeprow in taskdeprows %}
+					{% if taskdeprow['CMTaskID'] == taskrow['CMTaskID'] %}
+					<div><h3>-TY{{taskdeprow['CMDep']}} </h3></div>
+					{% endif %}
+					{%  endfor %}
+				</div>
+				<input type="hidden" value="{{taskrow['CMTaskID']}}" name="TaskID"/>
+				<input type="submit" value="Edit" name="TaskEdit"/>
+				<input type="submit" value="Delete" name="TaskDel"/>
+			</form>
+			{% endfor %}
+			<a href="{{url_for('projb.ProjOverv')}}">Back</a>
+		</div>
+	</body>
+</html>
