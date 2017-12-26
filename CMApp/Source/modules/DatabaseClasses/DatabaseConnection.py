@@ -2,42 +2,33 @@ from .__init__ import *
 
 class DatabaseConnectionBase:
 	
-	Prefix = "";
 	Database = "";
 	Connection = None;
 	
-	def __init__(self,Prefix, Database):
-		self.SetConnection(Prefix,Database);
+	def __init__(self, Database, RowType):
+		self.SetConnection(Database, RowType);
 	
 	def __del__(self):
-		#self.CloseDatabase();
-		self.Prefix = None;
 		self.Database = None;
 		self.Connection = None;
 	
 	def Save(self):
 		self.Connection.commit();
 	
-	def CloseDatabase(self):
+	def CloseConnection(self):
 		self.Connection.close();
 		
-	def SetConnection(self,Prefix, Database):
-		self.SetPrefix(Prefix);
+	def SetConnection(self, Database, RowType):
 		self.SetDatabase(Database);
-		self.Connection = sqlite3.connect(self.Prefix + self.Database);
-		self.SetRowTypeToSql();
+		self.Connection = sqlite3.connect(self.Database);
+		self.SetRowTypeToSql(RowType);
 		
-	def SetRowType(self,RowType):
-		self.Connection.row_factory = RowType;
-		
-	def SetRowTypeToSql(self):
-		self.Connection.row_factory = sqlite3.Row;
+	def SetRowTypeToSql(self, RowType):
+		if RowType == 1:
+			self.Connection.row_factory = sqlite3.Row;
 		
 	def SetDatabase(self,Database):
 		self.Database = Database;
-		
-	def SetPrefix(self,Prefix):
-		self.Prefix = Prefix;
 
 	def GetConnection(self):
 		return Self.Connection

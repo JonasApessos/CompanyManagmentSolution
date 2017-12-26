@@ -3,27 +3,37 @@
 <head>
 </head>
 <body>
-	<form action = "" method="POST">
+	<form action = "{{url_for('projb.AddProj')}}" method="POST">
+		
 		<h3>Select assigned Contract</h3>
 		<p>
-			<select>
-				<option value = "1">1</option>
-				<option value = "2">2</option>
+			<select name="ContrID">
+				{% for ContrRow in ContrRows %}
+					<option value = "{{ContrRow['CMContrID']}}">{{ContrRow['CMProdName']}}</option>
+				{% endfor %}
 			</select>
 		</p>
+		
 		<h3>Select assigned Company</h3>
 		<p>
-			<select>
-				<option value = "1">1</option>
-				<option value = "2">2</option>
+			<select name="CompID">
+				{% for CompRow in CompRows %}
+					<option value = "{{CompRow['CMCompID']}}">{{CompRow['CMCompName']}}</option>
+				{% endfor %}
 			</select>
 		</p>
-		<h3>Project Name</h3>
-		<p><input type="number" name="ProjName"/></p>
-		<h3>Creation Date</h3>
-		<p><input type="number" name="CDate"/></p>
-		<p><input type="submit" value="submit"/></p>
+		
+		<h3>Select assigned Department</h3>
+		<p>
+			<select name="DepID">
+				{% for DepRow in DepRows %}
+					<option value = "{{DepRow['CMDepID']}}">{{DepRow['CMDepName']}}</option>
+				{% endfor %}
+			</select>
+		</p>
+		
+		<p><input type="submit" value="Add"/></p>
 	</form>
-	<a href="{{url_for('Index')}}">Back</a>
+	<a href="{{url_for('projb.ProjOverv')}}">Back</a>
 </body>
 </html>

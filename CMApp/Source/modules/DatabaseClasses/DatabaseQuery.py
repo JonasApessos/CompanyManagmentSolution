@@ -5,19 +5,22 @@ class DatabaseQuery(DatabaseConnectionBase):
 	SqlScript = "";
 	Index = None;
 	
-	def __init__(self,Prefix,Database):
-		super().__init__(Prefix,Database);
+	def __init__(self, Database, RowType):
+		super().__init__(Database, RowType);
 		self.Index = super().GetIndex();
 		
 	def __del__(self):
 		super().__del__();
 		self.SqlScript = None;
+		self.Index = None;
 	
-	def ExecQuery(self):
-		self.Index.execute(self.SqlScript);
+	def ExecQuery(self, SqlScript):
+		self.SetSqlScript(SqlScript);
+		self.Index.execute(SqlScript);
 
-	def ExecQueryToRow(self):
-		self.Index.execute(self.SqlScript);
+	def ExecQueryToRow(self, SqlScript):
+		self.SetSqlScript(SqlScript);
+		self.Index.execute(SqlScript);
 		
 		return self.Index.fetchall();
 		
@@ -28,4 +31,4 @@ class DatabaseQuery(DatabaseConnectionBase):
 		self.SqlScript = SqlScript;
 	
 	def GetSqlScript(self):
-		return SqlScript;
+		return self.SqlScript;

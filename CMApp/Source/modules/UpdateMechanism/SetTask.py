@@ -2,7 +2,7 @@ from .__init__ import *
 
 def SetTask(TaskID,Name,Project,Pos,Norm,Neg,Month):
 	
-	Conn = DatabaseQuery(PREFIX, DATABASE);
+	Conn = DatabaseQuery(PREFIX + DATABASE, 0);
 	
 	Exp = (float(Pos) + (4 * float(Norm)) + float(Neg))/6;
 	Var = ((float(Neg) - float(Pos))/6) ** 2;
@@ -23,9 +23,7 @@ def SetTask(TaskID,Name,Project,Pos,Norm,Neg,Month):
 	WHERE \
 	("+PREFIX+"CMTaskInf.CMTaskID = "+str(TaskID)+");";
 	
-
-	Conn.SetSqlScript(SqlScript);
-	Conn.ExecQuery();
+	Conn.ExecQuery(SqlScript);
 	
 	SqlScript = " \
 	UPDATE "+PREFIX+"CMTask \
@@ -34,17 +32,16 @@ def SetTask(TaskID,Name,Project,Pos,Norm,Neg,Month):
 	CMProjID = "+str(Project)+" \
 	\
 	WHERE \
-	("+PREFIX+"CMTask.CMTaskID = "+TaskID+");";
+	("+PREFIX+"CMTask.CMTaskID = "+str(TaskID)+");";
 	
-	Conn.SetSqlScript(SqlScript);
-	Conn.ExecQuery();
+	Conn.ExecQuery(SqlScript);
 	
 	Conn.Save();
-	Conn.CloseDatabase();
+	Conn.CloseConnection();
 	
 def SetTaskIsActiv(TaskID, IsActiv):
 	
-	Conn = DatabaseQuery(PREFIX, DATABASE);
+	Conn = DatabaseQuery(PREFIX + DATABASE, 0);
 	
 	#Queries
 	SqlScript = " \
@@ -56,8 +53,7 @@ def SetTaskIsActiv(TaskID, IsActiv):
 	WHERE \
 	("+PREFIX+"CMTask.CMTaskID = "+str(TaskID)+");";
 	
-	Conn.SetSqlScript(SqlScript);
-	Conn.ExecQuery();
+	Conn.ExecQuery(SqlScript);
 	
 	Conn.Save();
-	Conn.CloseDatabase();
+	Conn.CloseConnection();

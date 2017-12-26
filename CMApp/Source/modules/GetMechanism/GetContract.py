@@ -1,57 +1,76 @@
 from .__init__ import *
 
-def GetContractList():
-
-	Conn = DatabaseQuery(PREFIX, DATABASE);
+def GetContractList(RowType):
 	
-	SqlScript = " \
-	SELECT \
-	"+PREFIX+"CMContrInf.CMProdName, \
-	"+PREFIX+"CMContrInf.CMContrID \
-    \
-	FROM \
-	"+PREFIX+"CMContrInf, \
-	"+PREFIX+"CMContr \
-    \
-	WHERE \
-	("+PREFIX+"CMContr.CMContrID = "+PREFIX+"CMContrInf.CMContrID) \
-	AND \
-	("+PREFIX+"CMContr.CMActiv = 1);";
+	try:
 	
+		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
+		
+		SqlScript = " \
+		SELECT \
+		"+PREFIX+"CMContrInf.CMProdName, \
+		"+PREFIX+"CMContrInf.CMContrID \
+		\
+		FROM \
+		"+PREFIX+"CMContrInf, \
+		"+PREFIX+"CMContr \
+		\
+		WHERE \
+		("+PREFIX+"CMContr.CMContrID = "+PREFIX+"CMContrInf.CMContrID) \
+		AND \
+		("+PREFIX+"CMContr.CMActiv = 1);";
+		
+		Rows = Conn.ExecQueryToRow(SqlScript);
+		
+		Conn.CloseConnection();
+		
+		return Rows;
+		
+	except Exception as Error:
 	
-	Conn.SetSqlScript(SqlScript);
+		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
+		
+		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
+		
+		Handle.CloseStream();
+		
+		return None;
 	
-	Rows = Conn.ExecQueryToRow();
+def GetContractListByProject(RowType,ProjID):
 	
-	Conn.CloseDatabase();
+	try:
 	
-	return Rows;
+		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
+		
+		SqlScript = " \
+		SELECT \
+		"+PREFIX+"CMContrInf.CMProdName, \
+		"+PREFIX+"CMContrInf.CMContrID \
+		\
+		FROM \
+		"+PREFIX+"CMContrInf, \
+		"+PREFIX+"CMContr, \
+		"+PREFIX+"CMProj \
+		\
+		WHERE \
+		("+PREFIX+"CMContr.CMContrID = "+PREFIX+"CMContrInf.CMContrID) \
+		AND \
+		("+PREFIX+"CMProj.CMContrID = "+PREFIX+"CMContr.CMContrID) \
+		AND \
+		("+PREFIX+"CMProj.CMProjID = "+str(ProjID)+");";
+		
+		Rows = Conn.ExecQueryToRow(SqlScript);
+		
+		Conn.CloseConnection();
+		
+		return Rows;
 	
-def GetContractListByProject(ProjID):
+	except Exception as Error:
 	
-	Conn = DatabaseQuery(PREFIX, DATABASE);
-	
-	SqlScript = " \
-	SELECT \
-	"+PREFIX+"CMContrInf.CMProdName, \
-	"+PREFIX+"CMContrInf.CMContrID \
-    \
-	FROM \
-	"+PREFIX+"CMContrInf, \
-	"+PREFIX+"CMContr, \
-	"+PREFIX+"CMProj \
-    \
-	WHERE \
-	("+PREFIX+"CMContr.CMContrID = "+PREFIX+"CMContrInf.CMContrID) \
-	AND \
-	("+PREFIX+"CMProj.CMContrID = "+PREFIX+"CMContr.CMContrID) \
-	AND \
-	("+PREFIX+"CMProj.CMProjID = "+str(ProjID)+");";
-	
-	Conn.SetSqlScript(SqlScript);
-	
-	Rows = Conn.ExecQueryToRow();
-	
-	Conn.CloseDatabase();
-	
-	return Rows;
+		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
+		
+		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
+		
+		Handle.CloseStream();
+		
+		return None;
