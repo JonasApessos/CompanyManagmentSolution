@@ -1,15 +1,16 @@
 from . import *
 
 from modules.GetMechanism.GetProjects import GetProjectList, GetProjectListByID, GetProjectContractList, GetProjectContractListByID
-from modules.GetMechanism.GetContract import GetContractListByProject
 from modules.GetMechanism.GetTask import GetProjectTask, GetProjectTaskDep
-from modules.GetMechanism.GetContract import GetContractList
+from modules.GetMechanism.GetContract import GetContractList, GetContractListByProjectID
 from modules.GetMechanism.GetCompany import GetCompanyList
 from modules.GetMechanism.GetDepartment import GetDepartmentList
 
 from modules.UpdateMechanism.SetProject import SetProject, SetProjectIsActiv
 
 from modules.InsertMechanism.InsertProject import IProj
+
+from modules.TableDiagramSystem import TableDiagram
 
 #//=======================<Project Functions>=======================//
 
@@ -44,9 +45,16 @@ def ProjTaskDisplay():
 		
 			if "ProjID" in session:
 				
+				Table = TableDiagram();
+				
 				#Get the project Tasks to display 
 				TaskRows = GetProjectTask(1,session["ProjID"]);
 				TaskDepRows = GetProjectTaskDep(1,session["ProjID"]);
+				
+				#TaskList = GetProjectTask(0,session["ProjID"]);
+				#TaskDepList = GetProjectTaskDep(0,session["ProjID"]);
+				
+				TableList = Table.CreateTableDiagram(GetProjectTask(0,session["ProjID"]), GetProjectTaskDep(0,session["ProjID"]));
 			
 				#render html
 				return render_template("DisplayData/TaskData.html",TaskRows = TaskRows,TaskDepRows = TaskDepRows );

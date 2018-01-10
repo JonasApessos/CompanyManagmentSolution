@@ -1,73 +1,71 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/ProjectOverview.css')}}">
 	</head>
 	
 	<body>
-	
-		<h3>Project</h3>
 		
-		<div>
+		<div class="MainMenu">
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Company's</p></div></a>
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Employees</p></div></a>
+		</div>
+	
+		
+		<div class="ProjOverv">
+			<h3>Project</h3>
 			{% for ProjRow in ProjRows %}
-			<form action="{{url_for('projb.ProjOvervLoad')}}" method="POST">
-			
-				<div>
-					<h3>{{ProjRow['CMProdName']}}</h3>
-				</div>
-				
-				<div>
-					<h4>Project ID: </h4>
-					<h5>{{ProjRow['CMProjID']}}</h5>
-				</div>
-				
-				<div>
-					<h4>Assigned Company: </h4>
-					<h5>{{ProjRow['CMCompName']}}</h5>
-				</div>
-				
-				<div>
-					<h4>Contractor: </h4>
-					<h5>{{ProjRow['CMContractor']}}</h5>
-				</div>
-				
-				<div>
-					<h4>Due Date: <h4>
-					<h5>{{ProjRow['CMDueDate']}}</h5>
-				</div>
-				
-				<div>
-					<h4>Project Start: </h4>
-					<h5>{{ProjRow['CMDateS']}}</h5>
-				</div>
-				
-				<div>
-					<input type="hidden" value="{{ProjRow['CMProjID']}}" name="ProjID"/>
-				</div>
-				
-				<div>
-					<input type="submit" value="Load" name="ProjLoad"/>
-				</div>
-				
-				<div>
-					<input type="submit" value="Edit" name="ProjEdit"/>
-				</div>
-				
-				<div>
-					<input type="submit" value="Delete" name="ProjDel"/>
-				</div>
-				
-			</form>
-			
 			<div>
 			
+				<form action="{{url_for('projb.ProjOvervLoad')}}" method="POST">
 				
-			
+					<div>
+						<p>{{ProjRow['CMProdName']}}</p>
+					</div>
+					
+					<div>
+						<p>Project ID: </p>
+						<p>{{ProjRow['CMProjID']}}</p>
+					</div>
+					
+					<div>
+						<p>Assigned Company: </p>
+						<p>{{ProjRow['CMCompName']}}</p>
+					</div>
+					
+					<div>
+						<p>Contractor: </p>
+						<p>{{ProjRow['CMContractor']}}</p>
+					</div>
+					
+					<div>
+						<p>Due Date: <p>
+						<p>{{ProjRow['CMDueDate']}}</p>
+					</div>
+					
+					<div>
+						<p>Project Start: </p>
+						<p>{{ProjRow['CMDateS']}}</p>
+					</div>
+					
+					<input type="hidden" value="{{ProjRow['CMProjID']}}" name="ProjID"/>
+					
+					<input type="submit" value="Load" name="ProjLoad"/>
+					
+					<input type="submit" value="Edit" name="ProjEdit"/>
+					
+					<input type="submit" value="Delete" name="ProjDel"/>
+					
+				</form>
+				
 			</div>
-			
 			{% endfor %}
-			<a href="{{url_for('projb.ProjForm')}}">New Project</a>
+			<a href="{{url_for('projb.ProjForm')}}"><div><p>New Project</p></div></a>
 			
-			<a href="{{url_for('Index')}}">Back</a>
+			<a href="{{url_for('Index')}}"><div><p>Back</p></div></a>
 			
 		</div>
 		

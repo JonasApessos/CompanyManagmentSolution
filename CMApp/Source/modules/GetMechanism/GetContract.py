@@ -36,7 +36,7 @@ def GetContractList(RowType):
 		
 		return None;
 	
-def GetContractListByProject(RowType,ProjID):
+def GetContractListByProjectID(RowType,ProjID):
 	
 	try:
 	
