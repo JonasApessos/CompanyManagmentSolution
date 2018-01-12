@@ -1,46 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Project/ProjTaskAddForm/ProjTaskAddForm.css')}}">
+	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/form/form.css')}}">
+	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
+	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Footer.css')}}">
 </head>
 <body>
-	<form action = "{{url_for('taskb.AddTask')}}" method="POST">
-	
-		<h3>Assigned project</h3>
+	<div class="MainMenu">
+		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
+		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
+		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Company's</p></div></a>
+		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Employees</p></div></a>
+	</div>
+
+	<div class="FormItem">
 		<div>
-			{% for TaskProjRow in TaskProjRows %}
-				<input type="text" name="ProjID" value="{{TaskProjRow['CMProjID']}}" />
-			{% endfor %}
+			<form action = "{{url_for('taskb.AddTask')}}" method="POST">
+				<div>
+					<div>
+						<p>Add Task</p>
+					</div>
+				
+					<div>
+						<p>Assigned project</p>
+						{% for TaskProjRow in TaskProjRows %}
+							<input type="text" name="ProjID" value="{{TaskProjRow['CMProjID']}}"/>
+						{% endfor %}
+					</div>
+				
+					<div>
+						<p>Task Name:</p>
+						<input type="text" name="TaskName"/>
+					</div>
+					
+					<div>
+						<p>Positive prediction</p>
+						<input type="number" name="PosPre"/>
+					</div>
+					
+					<div>
+						<p>Normal prediction</p>
+						<input type="number" name="NormPre"/>
+					</div>
+					
+					<div>
+						<p>Negative Prediction</p>
+						<input type="number" name="NegPre"/>
+					</div>
+					
+					<div>
+						<p>Months</p>
+						<input type="number" name="Months"/>
+					</div>
+					
+					<div>
+						<p>Dependency</p>
+						{% for TaskProjRow in TaskProjRows %}
+							<p>Projects ID: {{TaskProjRow['CMProdName']}}</p>
+							{% for TaskRow in TaskRows %}
+								{% if TaskProjRow['CMProjID'] == TaskRow['CMProjID'] %}
+									<div>
+										<input type="checkbox" name="TaskDep[]" value="{{TaskRow['CMTaskID']}}"/>
+										<p>{{TaskRow['CMName']}}</p>
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% endfor %}
+					</div>
+					
+					<input type="submit" value="Add"/>
+				</div>
+			</form>
 		</div>
+	</div>
 	
-		<h3>Task Name:</h3>
-		<div><input type="text" name="TaskName"/></div>
-		
-		<h3>Positive prediction</h3>
-		<div><input type="number" name="PosPre"/></div>
-		
-		<h3>Normal prediction</h3>
-		<div><input type="number" name="NormPre"/></div>
-		
-		<h3>Negative Prediction</h3>
-		<div><input type="number" name="NegPre"/></div>
-		
-		<h3>Months</h3>
-		<div><input type="number" name="Months"/></div>
-		
-		<h3>Dependency</h3>
-		<div>
-			{% for TaskProjRow in TaskProjRows %}
-				<h4>Projects ID: {{TaskProjRow['CMProdName']}}</h4>
-				{% for TaskRow in TaskRows %}
-					{% if TaskProjRow['CMProjID'] == TaskRow['CMProjID'] %}
-						<div><input type="checkbox" name="TaskDep[]" value="{{TaskRow['CMTaskID']}}"/><h5>{{TaskRow['CMName']}}</h5></div>
-					{% endif %}
-				{% endfor %}
-			{% endfor %}
-		</div>
-		
-		<div><input type="submit" value="Add"/></div>
-	</form>
-	<a href="{{url_for('projb.ProjOverv')}}">Back</a>
+	<div class="LinkButton">
+		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Back</p></div></a>
+	</div>
+	
+	<div class="Footer">
+	</div>
 </body>
 </html>

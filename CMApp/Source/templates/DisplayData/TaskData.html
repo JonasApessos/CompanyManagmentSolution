@@ -2,61 +2,78 @@
 <html>
 
 	<head>
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Project/ProjOverv/ProjOverv.css')}}">
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Header.css')}}">
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/ItemList.css')}}">
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Footer.css')}}">
 	</head>
 	
-	<body>
+	<body>	
+		<div class="MainMenu">
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Company's</p></div></a>
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Employees</p></div></a>
+		</div>
 	
-		<div>
+		<div class="ItemList">
+			<h1>{{ProdName['ProdName']}} Tasks</h1>
 			{% for TaskRow in TaskRows %}
-				<h1>{{TaskRow['CMName']}}</h1>
+			<div>
+
 				<form action="{{url_for('taskb.TaskLoad')}}" method="POST">
-				
+					
 					<div>
-						<h3>Task ID</h3>
-						<h4>{{TaskRow['CMTaskID']}}</h4>
+						<p>{{TaskRow['CMName']}}</p>
 					</div>
 					
 					<div>
-						<h3>Positive </h3>
-						<h4>{{TaskRow['CMPos']}}</h4>
+						<p>Task ID</p>
+						<p>{{TaskRow['CMTaskID']}}</p>
 					</div>
 					
 					<div>
-						<h3>Negative </h3>
-						<h4>{{TaskRow['CMNeg']}}</h4>
+						<p>Positive </p>
+						<p>{{TaskRow['CMPos']}}</p>
 					</div>
 					
 					<div>
-						<h3>Normal </h3>
-						<h4>{{TaskRow['CMNorm']}}</h4>
+						<p>Negative </p>
+						<p>{{TaskRow['CMNeg']}}</p>
 					</div>
 					
 					<div>
-						<h3>Variance </h3>
-						<h4>{{TaskRow['CMVar']}}</h4>
+						<p>Normal </p>
+						<p>{{TaskRow['CMNorm']}}</p>
 					</div>
 					
 					<div>
-						<h3>Expected </h3>
-						<h4>{{TaskRow['CMExp']}}</h4>
+						<p>Variance </p>
+						<p>{{TaskRow['CMVar']}}</p>
 					</div>
 					
 					<div>
-						<h3>Months </h3>
-						<h4>{{TaskRow['CMMonth']}}</h4>
+						<p>Expected </p>
+						<p>{{TaskRow['CMExp']}}</p>
 					</div>
 					
 					<div>
-						<h3>Date Created </h3>
-						<h4>{{TaskRow['CMDateC']}}</h4>
+						<p>Months </p>
+						<p>{{TaskRow['CMMonth']}}</p>
 					</div>
 					
 					<div>
-						<h2>Dependancys<h2>
+						<p>Date Created </p>
+						<p>{{TaskRow['CMDateC']}}</p>
+					</div>
+					
+					<div>
+						<p>Dependancys<p>
 						{% for TaskDepRow in TaskDepRows %}
 							{% if TaskDepRow['CMTaskID'] == TaskRow['CMTaskID'] %}
 								<div>
-									<h3>-{{TaskDepRow['CMName']}}</h3>
+									<p>-{{TaskDepRow['CMName']}}</p>
 								</div>
 							{% endif %}
 						{% endfor %}
@@ -69,11 +86,18 @@
 					<input type="submit" value="Delete" name="TaskDel"/>
 					
 				</form>
+			</div>
 			{% endfor %}
-			<a href="{{url_for('projb.ProjOverv')}}">Back</a>
 			
-			<a href="{{url_for('projb.ProjTaskForm')}}">New task</a>
+			<a href="{{url_for('projb.ProjTaskForm')}}"><div><p>New task</p></div></a>
 			
+		</div>
+		
+		<div class="LinkButton">
+			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Back</p></div></a>			
+		</div>
+		
+		<div class="Footer">
 		</div>
 		
 	</body>

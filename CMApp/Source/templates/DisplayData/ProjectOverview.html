@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Project/ProjOverv/ProjOverv.css')}}">
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Header.css')}}">
 		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
-		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/ProjectOverview.css')}}">
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/ItemList.css')}}">
+		<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Footer.css')}}">
 	</head>
 	
-	<body>
-		
+	<body>		
 		<div class="MainMenu">
 			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
 			<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
@@ -15,8 +17,8 @@
 		</div>
 	
 		
-		<div class="ProjOverv">
-			<h3>Project</h3>
+		<div class="ItemList">
+			<h1>Projects</h1>
 			{% for ProjRow in ProjRows %}
 			<div>
 			
@@ -52,6 +54,7 @@
 					</div>
 					
 					<input type="hidden" value="{{ProjRow['CMProjID']}}" name="ProjID"/>
+					<input type="hidden" value="{{ProjRow['CMProdName']}}" name="ProdName"/>
 					
 					<input type="submit" value="Load" name="ProjLoad"/>
 					
@@ -65,8 +68,13 @@
 			{% endfor %}
 			<a href="{{url_for('projb.ProjForm')}}"><div><p>New Project</p></div></a>
 			
+		</div>
+		
+		<div class="LinkButton">
 			<a href="{{url_for('Index')}}"><div><p>Back</p></div></a>
-			
+		</div>
+		
+		<div class="Footer">
 		</div>
 		
 	</body>

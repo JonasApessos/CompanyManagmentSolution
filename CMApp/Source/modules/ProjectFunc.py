@@ -1,15 +1,27 @@
 from . import *
 
+#functions for to get project data from the database
 from modules.GetMechanism.GetProjects import GetProjectList, GetProjectListByID, GetProjectContractList, GetProjectContractListByID
+
+#functions for to get task data from the database
 from modules.GetMechanism.GetTask import GetProjectTask, GetProjectTaskDep
+
+#functions for to get contract data from the database
 from modules.GetMechanism.GetContract import GetContractList, GetContractListByProjectID
+
+#functions for to get company data from the database
 from modules.GetMechanism.GetCompany import GetCompanyList
+
+#functions for to get department data from the database
 from modules.GetMechanism.GetDepartment import GetDepartmentList
 
+#functions for to set selected project data to the database
 from modules.UpdateMechanism.SetProject import SetProject, SetProjectIsActiv
 
+#functions for to insert project data to the database
 from modules.InsertMechanism.InsertProject import IProj
 
+#the diagram system
 from modules.TableDiagramSystem import TableDiagram
 
 #//=======================<Project Functions>=======================//
@@ -25,7 +37,7 @@ def ProjOverv():
 		#render html
 		return render_template("DisplayData/ProjectOverview.html",ProjRows = ProjectRows);
 		
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 	
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
@@ -41,9 +53,9 @@ def ProjTaskDisplay():
 
 	try:
 
-		if request.method == "POST":
+		if request.method == "POST":#do not enter if it is not a post request
 		
-			if "ProjID" in session:
+			if "ProjID" in session:#if there is no session for this variable, then there may have been an penetration attempt or error
 				
 				Table = TableDiagram();
 				
@@ -51,17 +63,16 @@ def ProjTaskDisplay():
 				TaskRows = GetProjectTask(1,session["ProjID"]);
 				TaskDepRows = GetProjectTaskDep(1,session["ProjID"]);
 				
-				#TaskList = GetProjectTask(0,session["ProjID"]);
-				#TaskDepList = GetProjectTaskDep(0,session["ProjID"]);
+				ProductName = {"ProdName" : session['ProdName']};
 				
-				TableList = Table.CreateTableDiagram(GetProjectTask(0,session["ProjID"]), GetProjectTaskDep(0,session["ProjID"]));
+				#TableList = Table.CreateTableDiagram(GetProjectTask(0,session["ProjID"]), GetProjectTaskDep(0,session["ProjID"]));
 			
 				#render html
-				return render_template("DisplayData/TaskData.html",TaskRows = TaskRows,TaskDepRows = TaskDepRows );
+				return render_template("DisplayData/TaskData.html",TaskRows = TaskRows,TaskDepRows = TaskDepRows, ProdName = ProductName );
 
 		return redirect(url_for("projb.ProjOverv"), code=303);
 		
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 	
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
@@ -77,7 +88,7 @@ def ProjTaskForm():
 
 	try:	
 	
-		if "ProjID" in session:
+		if "ProjID" in session:#if there is no session for this variable, then there may have been an penetration attempt or error
 		
 			TaskProjectRows = GetProjectListByID(1,session['ProjID']);
 			TaskProjectContractRows = GetProjectContractListByID(1,session['ProjID']);
@@ -86,7 +97,7 @@ def ProjTaskForm():
 			#render html with tuple data
 			return render_template("Forms/TaskForm.html",TaskProjRows = TaskProjectRows, TaskRows = TaskRows, TaskProjContrRows = TaskProjectContractRows);
 		
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 	
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
@@ -102,7 +113,7 @@ def ProjUpdate():
 
 	try:
 	
-		if request.method == "POST":
+		if request.method == "POST":#do not enter if it is not a post request
 			
 			#Get data from the form
 			ContrID = request.form['ContrID'];
@@ -117,7 +128,7 @@ def ProjUpdate():
 			
 		return redirect(url_for("projb.ProjOverv"), code=303);#if non of the above is true, then redirect to project list
 	
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 		
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
@@ -133,11 +144,11 @@ def ProjEdit():
 
 	try:
 
-		if request.method == "POST":
+		if request.method == "POST":#do not enter if it is not a post request
 		
-			if "ProjID" in session:
+			if "ProjID" in session:#if there is no session for this variable, then there may have been an penetration attempt or error
 
-				#Get all the listtype that the current project is associated to
+				#Get all the list type that the current project is associated to
 				ProjectRows = GetProjectListByID(1,session['ProjID']);
 				ContractRows = GetContractList(1);
 				CompanyRows = GetCompanyList(1);
@@ -147,7 +158,7 @@ def ProjEdit():
 				return render_template("Forms/ProjectEditForm.html", ContrRows = ContractRows, ProjRows = ProjectRows, CompRows = CompanyRows, DepRows = DepartmentRows);
 		return redirect(url_for("projb.ProjOverv"), code=303);#if non of the above is true, then redirect to project list
 		
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 	
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
@@ -158,20 +169,20 @@ def ProjEdit():
 		return render_template("ErrorIndex.html");
 ProjB.add_url_rule("/Forms/ProjectEditForm","ProjEdit",ProjEdit,methods=["POST"]);
 
-#Update the active value of the current selected project to FALSE 
+#Update the active value of the current selected project to FALSE, it does not actually delete the data
 def ProjDel():
 	
 	try:
 	
-		if request.method == "POST":
+		if request.method == "POST":#do not enter if it is not a post request
 		
-			if "ProjID" in session:
+			if "ProjID" in session:#if there is no session for this variable, then there may have been an penetration attempt or error
 				#Set the active value to 0 to deactivate it
 				SetProjectIsActiv(session['ProjID'],0);
 		
 		return redirect(url_for("projb.ProjOverv"),code=303);#if non of the above is true, then redirect to project list
 		
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 		
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
@@ -182,6 +193,7 @@ def ProjDel():
 		return render_template("ErrorIndex.html");
 ProjB.add_url_rule("/DeleteProject","ProjDel",ProjDel,methods=["POST"]);
 
+#The project edite form
 def ProjForm():
 
 	try:
@@ -192,7 +204,7 @@ def ProjForm():
 	
 		return render_template("forms/ProjectForm.html", ContrRows = ContractRows, CompRows = CompanyRows, DepRows = DepartmentRows);
 		
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 	
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
@@ -203,11 +215,12 @@ def ProjForm():
 		return render_template("ErrorIndex.html");
 ProjB.add_url_rule("/AddProject","ProjForm",ProjForm);
 
+#the add new project form
 def AddProj():
 
 	try:
 	
-		if request.method == "POST":
+		if request.method == "POST":#do not enter if it is not a post request
 	
 			ContrID = request.form['ContrID'];
 			CompID = request.form['CompID'];
@@ -217,9 +230,9 @@ def AddProj():
 	
 			return redirect(url_for('projb.ProjForm'), code=303);
 			
-		return redirect(url_for('projb.ProjOverv'), code=303);
+		return redirect(url_for('projb.ProjOverv'), code=303);#if non of the above is true, then redirect to project list
 		
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 	
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
@@ -235,11 +248,12 @@ def ProjOvervLoad():
 
 	try:
 
-		if request.method=="POST":
+		if request.method=="POST":#do not enter if it is not a post request
 			
-			if "ProjID" in request.form:
+			if "ProjID" in request.form:#if there is no session for this variable, then there may have been an penetration attempt or error
 			
 				session['ProjID'] = request.form['ProjID'];#set the current loaded project to session for the rest of the functions to know
+				session['ProdName'] = request.form['ProdName'];
 				
 				if "ProjLoad" in request.form:#if submit was ProjLoad then start project load methods
 			
@@ -255,7 +269,7 @@ def ProjOvervLoad():
 						
 		return redirect(url_for("projb.ProjOverv"), code=303);#if non of the above is true, then redirect to project list
 		
-	except Exception as Error:
+	except Exception as Error:#on exception register error to file
 	
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
 		
