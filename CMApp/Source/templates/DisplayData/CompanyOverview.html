@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {%include "CSSOvervLinks.html" %}
+  </head>
+
+  <body>
+
+    {%include "Menus/MainMenu.html" %}
+
+    <div class="ItemList">
+      <h1>Company's</h1>
+      {% for CompRow in CompRows %}
+      <div>
+
+        <form action="{{url_for('compb.CompanyLoad')}}" method="POST">
+          <div>
+            <p>{{CompRow['CMCompName']}}</p>
+          </div>
+
+          <div>
+              <p>Location</p>
+              <p>{{CompRow['CMLocation']}}</p>
+          </div>
+
+          <div>
+              <p>Interest</p>
+              <p>{{CompRow['CMLocInterest']}}</p>
+          </div>
+
+          <input type="hidden" value="{{CompRow['CMCompID']}}" name="CompID">
+          <input type="submit" value="Load" name="Load">
+          <input type="submit" value="Edit" name="Edit">
+          <input type="submit" value="Delete" name="Del">
+
+        </form>
+      </div>
+      {% endfor %}
+      <a href="{{url_for('compb.CompAdd')}}"><div><p>New Company</p></div></a>
+    </div>
+
+    <div class="LinkButton">
+      <a href="{{url_for('Index')}}"><div><p>Back</p></div></a>
+    </div>
+
+    {%include "Footer.html" %}
+  </body>
+</html>

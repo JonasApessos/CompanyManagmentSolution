@@ -1,0 +1,135 @@
+
+ .ItemList
+ {
+	 float:left;
+	 width:100%;
+	 margin:auto;
+	 clear:both;
+ }
+
+ .ItemList div
+ {
+	 float:left;
+	 width:25%;
+	 min-width:350px;
+	 background-color:rgba(32,30,28,1.0);
+	 margin:1% 1%;
+	 clear:none;
+ }
+
+ .ItemList div div:nth-child(1)
+ {
+	 width:90%;
+	 margin: 1% 5%;
+	 background-color:rgba(132,130,128,0.0);
+	 clear:both;
+	 border-style:none;
+ }
+
+ .ItemList div div:nth-child(1) p
+ {
+	 text-align:center;
+	 float:none;
+	 clear:both;
+ }
+
+ .ItemList div div:nth-child(1) p:nth-child(1)
+ {
+	 text-align:center;
+	 float:none;
+	 clear:both;
+ }
+
+ .ItemList div div
+ {
+	 width:100%;
+	 float:left;
+	 min-width:auto;
+	 margin:1% auto;
+	 background-color:rgba(72,70,68,1.0);
+	 clear:both;
+
+ }
+
+  .ItemList div div div
+ {
+	 min-width:auto;
+	 margin:2% auto 0% auto;
+	 background-color:rgba(122,120,118,1.0);
+	 border-style:none;
+ }
+
+ .ItemList div div p:nth-child(1)
+{
+  float:left;
+}
+
+
+ .ItemList div div p:nth-child(2)
+{
+  float:right;
+}
+
+ .ItemList input
+ {
+	 color:rgba(242,240,238,1.0);
+	 background-color:rgba(92,90,88,1.0);
+	 width:15%;
+	 min-width:50px;
+	 margin:1%;
+	 float:right;
+	 clear:none;
+	 border-style:none;
+	 outline-color:rgba(0,175,200,1.0);
+	 outline-style:solid;
+	 outline-width:2px;
+	 outline-color:rgba(0,0,0,0.0);
+ }
+
+ .ItemList input:hover
+ {
+	 background-color:rgba(62,60,58,1.0);
+ }
+
+ .ItemList input:active
+ {
+	 background-color:rgba(92,90,88,1.0);
+	 outline-color:rgba(0,200,250,1.0);
+	 outline-radius:3px;
+ }
+
+ .ItemList a div
+ {
+	color:rgba(242,240,238,1.0);
+	background-color:rgba(62,60,58,1.0);
+	width:5%;
+	float:left;
+	clear:none;
+	margin:1%;
+	padding:1%;
+	min-width:100px;
+	outline-style:solid;
+	outline-width:2px;
+	outline-color:rgba(0,0,0,0.0);
+
+ }
+
+ .ItemList a div:hover
+ {
+	background-color:rgba(32,30,28,1.0);
+ }
+
+  .ItemList a div:active
+ {
+	background-color:rgba(92,90,88,1.0);
+	outline-color:rgba(0,200,250,1.0);
+	outline-radius:3px;
+ }
+
+ .ItemList a div p
+ {
+	 text-align:center;
+	 float:none;
+	 clear:both;
+	 margin:auto;
+ }

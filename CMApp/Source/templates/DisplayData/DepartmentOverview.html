@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {%include "CSSOvervLinks.html" %}
+  </head>
+
+  <body>
+
+    {%include "Menus/MainMenu.html" %}
+
+    <div class="ItemList">
+      <h1>Company's</h1>
+        {% for DepRow in DepRows%}
+        <div>
+          <form action="{{url_for('depb.DepartmentLoad')}}" method="POST">
+            <div>
+              <p>{{DepRow['CMDepName']}}</p>
+            </div>
+
+            <div>
+                <p>Department Name</p>
+                <p>{{DepRow['CMDepName']}}</p>
+            </div>
+
+            <div>
+                <p>Creation Date</p>
+                <p>{{DepRow['CMDateC']}}</p>
+            </div>
+
+            <input type="hidden" value="{{DepRow['CMDepID']}}" name="DepID">
+            <input type="submit" value="Edit" name="Edit">
+            <input type="submit" value="Delete" name="Del">
+
+          </form>
+        </div>
+        {%endfor%}
+      <a href="{{url_for('depb.DepForm')}}"><div><p>New Department</p></div></a>
+    </div>
+
+    <div class="LinkButton">
+      <a href="{{url_for('compb.Company')}}"><div><p>Back</p></div></a>
+    </div>
+
+    {%include "Footer.html" %}
+  </body>
+</html>

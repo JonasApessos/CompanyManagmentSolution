@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{%include "CSSFormLinks.html" %}
+</head>
+<body>
+
+	{%include "Menus/MainMenu.html" %}
+
+	<div class="FormItem">
+		<div>
+			<form action = "" method="POST">
+				<div>
+					<div>
+						<p>Add Company</p>
+					</div>
+
+					<div>
+						<p>Company Name</p>
+						<input type="Text" name="CompName"/>
+					</div>
+
+					<div>
+						<p>Country</p>
+						<input type="Text" name="Country"/>
+					</div>
+
+					<div>
+						<p>Interest Rate</p>
+						<input type="number" name="IR"/>
+					</div>
+
+					<input type="submit" value="Add"/>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="LinkButton">
+		<a href="{{url_for('compb.Company')}}"><div><p>Back</p></div></a>
+	</div>
+
+	{%include "Footer.html" %}
+</body>
+</html>

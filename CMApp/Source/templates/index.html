@@ -1,13 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		{%include "CSSOvervLinks.html" %}
 	</head>
-	
-	<body>		
-		<h1>INDEX</h1>
-		<a href="{{url_for('projb.ProjOverv')}}">Projects</a>
-		<a href="{{url_for('contrb.ContrForm')}}">Contract Form</a>
-		<a href="{{url_for('compb.CompForm')}}">Company Form</a>
-		<a href="{{url_for('empb.EmpForm')}}">Employee Form</a>
+
+	<body>
+
+		{%include "Menus/MainMenu.html"%}
+		<div class="Welcome">
+			<h2>Welcome</h2>
+			<h3>To the company managment solution</h3>
+		</div>
+
+		<div class="WhatsNew">
+			<h1>See whats new</h1>
+			<div>
+				<div>
+					<h4>Feutures</h4>
+					<p>-Added new Menus and option</p>
+					<p>-New look for the application</p>
+				</div>
+
+				<div>
+					<h4>Bug Fixes</h4>
+					<p>-Fixed the employee form not passing the rite data in the database</p>
+					<p>-Corrected some data in forms that where missleading</p>
+				</div>
+			</div>
+		</div>
+
+
+		{%include "Footer.html"%}
 	</body>
 </html>

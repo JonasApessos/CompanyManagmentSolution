@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{%include "CSSFormLinks.html" %}
+</head>
+
+<body>
+  {%include "Menus/MainMenu.html" %}
+
+	<div class="FormItem">
+		<div>
+			{% for CompRow in CompRows %}
+				<form action = "{{url_for('compb.CompUpdate')}}" method="POST">
+					<div>
+						<div>
+							<p>Company ID {{CompRow['CompID']}}</p>
+						</div>
+
+            <div>
+              <p>Company name</p>
+              <input type="text" value="{{CompRow['CMCompName']}}" name="CompName"/>
+            </div>
+
+            <div>
+              <p>Company Location</p>
+              <input type="text" value="{{CompRow['CMLocation']}}" name="CompLoc"/>
+            </div>
+
+            <div>
+              <p>Company Interest</p>
+              <input type="number" value="{{CompRow['CMLocInterest']}}" name="CompLocI"/>
+            </div>
+
+						<input type="hidden" name="CompID" value="{{CompRow['CMCompID']}}"/>
+						<input type="submit" value="Save"/>
+
+					</div>
+
+				</form>
+				{% endfor %}
+		</div>
+	</div>
+
+	<div class="LinkButton">
+		<a href="{{url_for('compb.Company')}}"><div><p>Back</p></div></a>
+	</div>
+
+	{%include "Footer.html" %}
+</body>
+</html>

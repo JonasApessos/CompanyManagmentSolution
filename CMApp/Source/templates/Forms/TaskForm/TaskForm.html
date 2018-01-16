@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{%include "CSSFormLinks.html" %}
+</head>
+<body>
+	{%include "Menus/MainMenu.html" %}
+
+	<div class="FormItem">
+		<div>
+			<form action = "{{url_for('taskb.TaskAdd')}}" method="POST">
+				<div>
+					<div>
+						<p>Add Task</p>
+					</div>
+
+					<div>
+						<p>Assigned project</p>
+						{% for TaskProjRow in TaskProjRows %}
+							<input type="text" name="ProjID" value="{{TaskProjRow['CMProjID']}}"/>
+						{% endfor %}
+					</div>
+
+					<div>
+						<p>Task Name:</p>
+						<input type="text" name="TaskName"/>
+					</div>
+
+					<div>
+						<p>Positive prediction</p>
+						<input type="number" name="PosPre"/>
+					</div>
+
+					<div>
+						<p>Normal prediction</p>
+						<input type="number" name="NormPre"/>
+					</div>
+
+					<div>
+						<p>Negative Prediction</p>
+						<input type="number" name="NegPre"/>
+					</div>
+
+					<div>
+						<p>Months</p>
+						<input type="number" name="Months"/>
+					</div>
+
+					<div>
+						<p>Dependency</p>
+						{% for TaskProjRow in TaskProjRows %}
+							<p>Projects ID: {{TaskProjRow['CMProdName']}}</p>
+							{% for TaskRow in TaskRows %}
+								{% if TaskProjRow['CMProjID'] == TaskRow['CMProjID'] %}
+									<div>
+										<input type="checkbox" name="TaskDep[]" value="{{TaskRow['CMTaskID']}}"/>
+										<p>{{TaskRow['CMName']}}</p>
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% endfor %}
+					</div>
+
+					<input type="submit" value="Add"/>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="LinkButton">
+		<a href="{{url_for('projb.ProjTaskDisplay')}}"><div><p>Back</p></div></a>
+	</div>
+
+	{%include "Footer.html" %}
+</body>
+</html>

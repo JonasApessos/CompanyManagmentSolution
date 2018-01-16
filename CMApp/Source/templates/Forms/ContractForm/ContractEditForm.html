@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{%include "CSSFormLinks.html" %}
+</head>
+
+<body>
+  {%include "Menus/MainMenu.html" %}
+
+	<div class="FormItem">
+		<div>
+			{% for ContrRow in ContrRows %}
+				<form action = "{{url_for('contrb.ContrUpdate')}}" method="POST">
+					<div>
+						<div>
+							<p>Contract ID {{ContrRow['CMContrID']}}</p>
+						</div>
+
+            <div>
+              <p>Contractor</p>
+              <input type="text" value="{{ContrRow['CMContractor']}}" name="Contractor"/>
+            </div>
+
+            <div>
+              <p>Product Name</p>
+              <input type="text" value="{{ContrRow['CMProdName']}}" name="ProdName"/>
+            </div>
+
+            <div>
+              <p>Contract Pay</p>
+              <input type="text" value="{{ContrRow['CMContrPay']}}" name="ContrPay"/>
+            </div>
+
+            <div>
+              <p>Advance Pay</p>
+              <input type="text" value="{{ContrRow['CMAdvPay']}}" name="AdvPay"/>
+            </div>
+
+            <div>
+              <p>Due Date</p>
+              <input type="date" value="{{ContrRow['CMDueDate']}}" name="DDate"/>
+            </div>
+
+            <div>
+              <p>Date Start</p>
+              <input type="date" value="{{ContrRow['CMDateS']}}" name="DStart"/>
+            </div>
+
+						<input type="hidden" name="ContrID" value="{{ContrRow['CMContrID']}}"/>
+						<input type="submit" value="Save"/>
+
+					</div>
+
+				</form>
+				{% endfor %}
+
+		</div>
+	</div>
+
+	<div class="LinkButton">
+		<a href="{{url_for('contrb.Contract')}}"><div><p>Back</p></div></a>
+	</div>
+
+	{%include "Footer.html" %}
+</body>
+</html>

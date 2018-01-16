@@ -1,0 +1,144 @@
+p
+{
+	color:rgba(242,240,238,1.0);
+}
+
+.FormItem
+{
+	width:100%;
+	float:left;
+	margin:auto;
+	clear:both;
+}
+
+.FormItem div
+{
+	width:30%;
+	min-width:350px;
+	float:none;
+	margin:1% auto;
+	clear:both;
+}
+
+.FormItem div div
+{
+	background-color:rgba(32,30,28,1.0);
+	width:100%;
+	float:left;
+	margin:2% auto;
+	clear:both;
+}
+
+.FormItem div div div:nth-child(1)
+{
+	background-color:rgba(62,60,58,1.0);
+	float:left;
+	margin:0% auto;
+	width:100%;
+}
+
+.FormItem div div div:nth-child(1) p
+{
+	text-align:center;
+	float:none;
+	margin:1% auto;
+	clear:none;
+}
+
+.FormItem div div div
+{
+	background-color:rgba(92,90,88,1.0);
+	width:100%;
+	float:left;
+	clear:both;
+}
+
+.FormItem div div div p
+{
+	float:left;
+	margin:1%;
+	clear:left;
+}
+
+.FormItem div div div select
+{
+	float:right;
+	margin:1%;
+	clear:right
+}
+
+.FormItem div div div input
+{
+	background-color:rgba(122,120,118,1.0);
+	width:40%;
+	text-align:center;
+	float:right;
+	margin:1%;
+	clear:right
+}
+
+.FormItem div div div div
+{
+	width:90%;
+	float:none;
+	margin:1% auto;
+}
+
+.FormItem div input
+{
+	color:rgba(242,240,238,1.0);
+	background-color:rgba(92,90,88,1.0);
+	float:right;
+	width:15%;
+	min-width:50px;
+	margin:1%;
+	clear:none;
+	border-style:none;
+}
+
+.FormItem div input:hover
+ {
+	 background-color:rgba(62,60,58,1.0);
+ }
+
+ .FormItem div input:active
+ {
+	 background-color:rgba(92,90,88,1.0);
+	 outline-color:rgba(0,200,250,1.0);
+	 outline-radius:3px;
+ }
+
+ .FormItem a div
+ {
+	color:rgba(242,240,238,1.0);
+	background-color:rgba(62,60,58,1.0);
+	width:5%;
+	float:left;
+	clear:none;
+	margin:1%;
+	min-width:100px;
+	outline-style:solid;
+	outline-width:2px;
+	outline-color:rgba(0,0,0,0.0);
+
+ }
+
+ .FormItem a div:hover
+ {
+	background-color:rgba(62,60,58,1.0);
+ }
+
+  .FormItem a div:active
+ {
+	background-color:rgba(92,90,88,1.0);
+	outline-color:rgba(0,200,250,1.0);
+	outline-radius:3px;
+ }
+
+ .FormItem a div p
+ {
+	 text-align:center;
+	 float:none;
+	 clear:both;
+	 margin:auto;
+ }

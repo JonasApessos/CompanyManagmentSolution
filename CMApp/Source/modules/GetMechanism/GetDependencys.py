@@ -1,11 +1,11 @@
 from .__init__ import *
 
 def GetDepList(RowType):
-	
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript=" \
 		SELECT \
 		"+PREFIX+"CMTaskDep.CMTaskID, \
@@ -16,29 +16,29 @@ def GetDepList(RowType):
 		\
 		WHERE \
 		("+PREFIX+"CMTaskDep.CMActiv = 1);"
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-	
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;
-	
+
 def GetDepProjListByID(RowType,ProjID):
-	
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript=" \
 		SELECT \
 		"+PREFIX+"CMTaskDep.CMTaskID, \
@@ -56,17 +56,17 @@ def GetDepProjListByID(RowType,ProjID):
 		("+PREFIX+"CMTaskDep.CMActiv = 1);"
 
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-	
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;

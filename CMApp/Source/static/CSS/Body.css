@@ -1,0 +1,148 @@
+body
+ {
+	 background-color:rgba(240,242,238,1.0);
+	 margin:0%;
+   width:auto;
+ }
+
+ p
+ {
+	 float:left;
+	 color:rgba(242,240,238,1.0);
+	 margin:1%;
+	 clear:none;
+ }
+
+ h1
+ {
+   font-size:300%;
+	 text-align:center;
+	 float:none;
+	 margin:auto;
+	 clear:both;
+ }
+
+ h2
+ {
+  font-size:800%;
+  text-align:center;
+  float:none;
+  margin:auto;
+  clear:both;
+ }
+
+ h3
+ {
+   text-align:center;
+   float:none;
+   margin:auto;
+   clear:both;
+ }
+
+ .Welcome
+ {
+   width:100%;
+ }
+
+ .Welcome h2
+ {
+   width:100%;
+   margin:2% 0%;
+ }
+
+ .Welcome h3
+ {
+   width:100%;
+   margin:0% 0% 5% 0%;
+ }
+
+ .WhatsNew
+ {
+   font-size:70%;
+   color:rgba(242,240,238,1.0);
+   background-color:rgba(32,30,28,1.0);
+   width:100%;
+   float:left;
+   margin:0% 0% 1% 0%
+ }
+
+ .WhatsNew div
+ {
+   float:none;
+   width:90%;
+   margin:5% auto;
+ }
+
+ .WhatsNew div div:nth-child(1)
+ {
+   float:left;
+   clear:left;
+   width:25%;
+   margin:1%;
+ }
+
+ .WhatsNew div div:nth-child(2)
+ {
+   float:right;
+   clear:right;
+   width:25%;
+   margin:1%;
+ }
+
+ .WhatsNew div h4
+ {
+   font-size:200%;
+   float:left;
+   clear:both;
+   margin:auto;
+ }
+
+ .WhatsNew div p
+ {
+   font-size:150%;
+   float:left;
+   clear:both;
+   margin:auto;
+ }
+
+ .LinkButton
+ {
+	 float:left;
+	 clear:both;
+	 width:100%;
+	 margin:1% auto;
+ }
+
+ .LinkButton a div
+ {
+	 background-color:rgba(62,60,58,1.0);
+	 float:left;
+	 clear:none;
+	 margin:0% 1%;
+	 padding:1%;
+	 width:5%;
+	 min-width:75px;
+	outline-style:solid;
+	outline-width:2px;
+	outline-color:rgba(0,0,0,0.0);
+ }
+
+  .LinkButton a div:hover
+ {
+	background-color:rgba(32,30,28,1.0);
+ }
+
+  .LinkButton a div:active
+ {
+	background-color:rgba(92,90,88,1.0);
+	outline-color:rgba(0,200,250,1.0);
+	outline-radius:3px;
+ }
+
+  .LinkButton a div p
+ {
+	 text-align:center;
+	 float:none;
+	 clear:both;
+	 margin:auto;
+ }

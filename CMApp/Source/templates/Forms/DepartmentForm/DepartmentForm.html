@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	{%include "CSSFormLinks.html" %}
+
+</head>
+<body>
+
+	{%include "Menus/MainMenu.html" %}
+
+	<div class="FormItem">
+		<div>
+			<form action = "{{url_for('depb.DepAdd')}}" method="POST">
+				<div>
+					<div>
+						<p>Add Department</p>
+					</div>
+
+					<div>
+						<p>Department Name</p>
+						<input type="Text" name="DepName">
+					</div>
+
+					<input type="submit" value="Add">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="LinkButton">
+		<a href="{{url_for('depb.Department')}}"><div><p>Back</p></div></a>
+	</div>
+
+	{%include "Footer.html" %}
+</body>
+</html>
