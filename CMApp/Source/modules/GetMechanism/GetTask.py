@@ -1,9 +1,9 @@
 from .__init__ import *
 
 def GetTaskList(RowType):
-	
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
 
 		SqlScript = " \
@@ -28,29 +28,29 @@ def GetTaskList(RowType):
 		("+PREFIX+"CMTask.CMTaskID = "+PREFIX+"CMTaskInf.CMTaskID)\
 		AND \
 		("+PREFIX+"CMTask.CMActiv = 1);";
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-		
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;
-	
-def GetTaskByID(RowType, TaskID):
-	
+
+def GetTaskByID(TaskID, RowType):
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript = " \
 		SELECT \
 		"+PREFIX+"CMTaskInf.CMTaskID, \
@@ -73,29 +73,29 @@ def GetTaskByID(RowType, TaskID):
 		("+PREFIX+"CMTask.CMTaskID = "+PREFIX+"CMTaskInf.CMTaskID)\
 		AND \
 		("+PREFIX+"CMTaskInf.CMActiv = 1);";
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-	
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;
-		
-def GetProjectTask(RowType, ProjectID):
-	
+
+def GetProjectTask(ProjectID, RowType):
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript = " \
 		SELECT \
 		"+PREFIX+"CMTaskInf.CMTaskID, \
@@ -121,75 +121,71 @@ def GetProjectTask(RowType, ProjectID):
 		AND \
 		("+PREFIX+"CMTask.CMProjID = "+str(ProjectID)+") \
 		AND \
-		("+PREFIX+"CMTask.CMActiv = 1)";
-		
+		("+PREFIX+"CMTask.CMActiv = 1);";
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-		
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return redirect(url_for("Index"), code=303);
-	
-def GetProjectTaskDep(RowType, ProjectID):
-	
+
+def GetProjectTaskDep(ProjectID, RowType):
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
-		SqlScript = " \
+
+		SqlScript=" \
 		SELECT \
 		"+PREFIX+"CMTaskDep.CMTaskID, \
-		"+PREFIX+"CMTaskDep.CMDep, \
-        "+PREFIX+"CMTaskInf.CMName \
-		\
+		"+PREFIX+"CMTaskDep.CMDep\
+				\
 		FROM \
 		"+PREFIX+"CMTaskDep, \
-		"+PREFIX+"CMTask, \
-		"+PREFIX+"CMProj,\
-        "+PREFIX+"CMTaskInf \
-		\
+		"+PREFIX+"CMTask\
+				\
 		WHERE \
-		("+PREFIX+"CMTask.CMTaskID = "+PREFIX+"CMTaskDep.CMTaskID) \
+		("+PREFIX+"CMTaskDep.CMTaskID = "+PREFIX+"CMTask.CMTaskID) \
 		AND \
-		("+PREFIX+"CMTask.CMTaskID = "+PREFIX+"CMTaskDep.CMTaskID) \
-        AND \
-		("+PREFIX+"CMTaskInf.CMTaskID = "+PREFIX+"CMTaskDep.CMDep) \
+		("+PREFIX+"CMTask.CMProjID = "+str(ProjectID)+") \
 		AND \
-		("+PREFIX+"CMProj.CMProjID = 1) \
-		AND \
-		("+PREFIX+"CMTask.CMActiv = 1)";
-		
+		("+PREFIX+"CMTask.CMActiv = 1) \
+		ORDER BY "+PREFIX+"CMTaskDep.CMDep DESC;";
+
+
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-	
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;
 
-def GetTaskDepByID(RowType, TaskID):
-	
+def GetTaskDepByID(TaskID, RowType):
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript =" \
 		SELECT \
 		"+PREFIX+"CMTaskDep.CMTaskID, \
@@ -202,29 +198,29 @@ def GetTaskDepByID(RowType, TaskID):
 		("+PREFIX+"CMTaskDep.CMTaskID = "+str(TaskID)+") \
 		AND \
 		("+PREFIX+"CMTaskDep.CMActiv = 1);";
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-		
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;
-	
+
 def GetTaskDepList(RowType):
-	
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript =" \
 		SELECT \
 		"+PREFIX+"CMTaskDep.CMTaskID, \
@@ -235,19 +231,19 @@ def GetTaskDepList(RowType):
 		\
 		WHERE \
 		("+PREFIX+"CMTaskDep.CMActiv = 1);";
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-	
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;

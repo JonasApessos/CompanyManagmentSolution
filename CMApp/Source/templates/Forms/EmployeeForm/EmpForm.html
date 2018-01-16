@@ -1,21 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Employee/EmployeeAddForm/EmployeeAddForm.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/form/form.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Footer.css')}}">
+	{%include "CSSFormLinks.html" %}
 
 </head>
 <body>
-	<div class="MainMenu">
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Company's</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Employees</p></div></a>
-	</div>
-	
+	{%include "Menus/MainMenu.html" %}
+
 	<div class="FormItem">
 		<div>
 			<form action = "" method="POST">
@@ -23,62 +15,61 @@
 					<div>
 						<p>Add Employee</p>
 					</div>
-				
+
 					<div>
 						<p>Employee Name</p>
 						<input type="text" name="EmpName"/>
 					</div>
-					
+
 					<div>
 						<p>Employee Date of birth</p>
 						<input type="date" name="BDay"/>
 					</div>
-					
+
 					<div>
 						<p>City</p>
 						<input type="text" name="EmpCity"/>
 					</div>
-					
+
 					<div>
 						<p>Employee civil code</p>
 						<input type="text" name="EmpCivilCode"/>
 					</div>
-					
+
 					<div>
 						<p>Availability for work (0.0-1.0)</p>
 						<input min=0 max=1 type="number" step="0.01" name="EmpAvail"/>
 					</div>
-					
+
 					<div>
 						<p>Department</p>
 						<select name="DepOption">
 							{% for row in rows %}
-							<option value={{row['CMDepID']}}>{{row['CMName']}} -> {{row['CMCompName']}}</option>
+							<option value={{row['CMDepID']}}>{{row['CMDepName']}} -> {{row['CMCompName']}}</option>
 							{% endfor %}
 						</select>
 					</div>
-					
+
 					<div>
 						<p>Employee Salary</p>
 						<input type="number" name="EmpSal"/>
 					</div>
-					
+
 					<div>
 						<p>Employee Salary assigned date</p>
 						<input type="date" name="EmpSalDateS"/>
 					</div>
-					
+
 					<input type="submit" value="submit"/>
 				</div>
 			</form>
 		</div>
 	</div>
-	
+
 	<div class="LinkButton">
-		<a href="{{url_for('Index')}}"><div><p>Back</p></div></a>
+		<a href="{{url_for('empb.Employee')}}"><div><p>Back</p></div></a>
 	</div>
-	
-	<div class="Footer">
-	</div>
+
+	{%include "Footer.html" %}
 </body>
 </html>

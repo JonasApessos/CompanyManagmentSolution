@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/form/form.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Project/ProjTaskEditForm/ProjTaskEditForm.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Footer.css')}}">
+<head lang="en">
+	{%include "CSSFormLinks.html" %}
 </head>
 
 <body>
-	<div class="MainMenu">
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Company's</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Employees</p></div></a>
-	</div>
-	
+	{%include "Menus/MainMenu.html" %}
+
 	<div class="FormItem">
 		<div>
 			{% for TaskDataRow in TaskDataRows %}
-				<form action = "{{url_for('taskb.UpdateTask')}}" method="POST">
+				<form action = "{{url_for('taskb.TaskUpdate')}}" method="POST">
 					<div>
 						<div>
 							<p>Task {{TaskDataRow['CMName']}}</p>
@@ -28,7 +20,7 @@
 							<p>Task Name:</p>
 							<input type="text" name="TaskName" value="{{TaskDataRow['CMName']}}"/>
 						</div>
-						
+
 						<div>
 							<p>Assigned project</p>
 							<select name="ProjOption">
@@ -45,27 +37,27 @@
 								{% endfor %}
 							</select>
 						</div>
-						
+
 						<div>
 							<p>Positive prediction</p>
 							<input type="number" name="PosPre"value="{{TaskDataRow['CMPos']}}"/>
 						</div>
-						
+
 						<div>
 							<p>Normal prediction</p>
 							<input type="number" name="NormPre" value="{{TaskDataRow['CMNorm']}}"/>
 						</div>
-						
+
 						<div>
 							<p>Negative Prediction</p>
 							<input type="number" name="NegPre" value="{{TaskDataRow['CMNeg']}}"/>
 						</div>
-						
+
 						<div>
 							<p>Months</p>
 							<input type="number" name="Months" value="{{TaskDataRow['CMMonth']}}"/>
 						</div>
-						
+
 						<!--<h3>Dependency</h3>
 						<div>
 							{% for TaskRow in TaskRows %}
@@ -80,19 +72,18 @@
 								{% endfor %}
 							{% endfor %}
 						</div>-->
-						
-						<input type="submit" value="submit"/>
+
+						<input type="submit" value="Save"/>
 					</div>
 				</form>
 			{% endfor %}
 		</div>
 	</div>
-	
+
 	<div class="LinkButton">
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Back</p></div></a>
+		<a href="{{url_for('projb.ProjTaskDisplay')}}"><div><p>Back</p></div></a>
 	</div>
-	
-	<div class="Footer">
-	</div>
+
+	{%include "Footer.html" %}
 </body>
 </html>

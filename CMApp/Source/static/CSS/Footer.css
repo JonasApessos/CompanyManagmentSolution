@@ -6,3 +6,17 @@
 	height:250px;
 	margin:0%;
 }
+
+.Footer div
+{
+	width:auto;
+	float:right;
+	margin:10% 5% auto auto;
+}
+
+.Footer div p
+{
+	margin:auto;
+	float:left;
+	clear:both;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head lang="en">
+		{%include "CSSOvervLinks.html" %}
+	</head>
+
+	<body>
+		{%include "Menus/MainMenu.html" %}
+
+
+		<div class="ItemList">
+			<h1>Employee's</h1>
+			{% for EmpRow in EmpRows %}
+			<div>
+
+				<form action="{{url_for('empb.EmployeeLoad')}}" method="POST">
+
+					<div>
+						<p>{{EmpRow['CMEmpName']}}</p>
+					</div>
+
+					<div>
+						<p>City</p>
+						<p>{{EmpRow['CMCity']}}</p>
+					</div>
+
+					<div>
+						<p>Employee Civil Code</p>
+						<p>{{EmpRow['CMCivCode']}}</p>
+					</div>
+
+					<div>
+						<p>Employee Birth Date</p>
+						<p>{{EmpRow['CMBirthDate']}}</p>
+					</div>
+
+					<div>
+						<p>Employee Salary</p>
+						<p>{{EmpRow['CMIncome']}}</p>
+					</div>
+
+					<input type="hidden" value="{{EmpRow['CMEmpID']}}" name="EmpID"/>
+
+					<input type="submit" value="Edit" name="Edit"/>
+
+					<input type="submit" value="Delete" name="Del"/>
+
+				</form>
+
+			</div>
+			{% endfor %}
+			<a href="{{url_for('empb.EmpForm')}}"><div><p>New Employee</p></div></a>
+
+		</div>
+
+		<div class="LinkButton">
+			<a href="{{url_for('Index')}}"><div><p>Back</p></div></a>
+		</div>
+
+		{%include "Footer.html" %}
+
+	</body>
+
+</html>

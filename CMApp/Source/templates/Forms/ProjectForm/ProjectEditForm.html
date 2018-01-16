@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Project/ProjEditForm/ProjEditForm.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/form/form.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Footer.css')}}">
+	{%include "CSSFormLinks.html" %}
 </head>
 
 <body>
-	<div class="MainMenu">
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Company's</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Employees</p></div></a>
-	</div>
+	{%include "Menus/MainMenu.html" %}
 
 	<div class="FormItem">
 		<div>
@@ -23,7 +15,7 @@
 						<div>
 							<p>Project ID {{ProjRow['CMProjID']}}</p>
 						</div>
-						
+
 						<div>
 							<p>Select assigned Contract</p>
 							<select name="ContrID">
@@ -32,13 +24,13 @@
 										{% if ProjRow['CMContrID'] == ContrRow['CMContrID'] %}
 											<option value = "{{ContrRow['CMContrID']}}" selected>{{ContrRow['CMProdName']}}</option>
 										{% else %}
-											<option value = "{{ContrRow['CMContrID']}}">{{ContrRow['CMProdName']}}</option>	
+											<option value = "{{ContrRow['CMContrID']}}">{{ContrRow['CMProdName']}}</option>
 										{% endif %}
 									{% endfor %}
 								{% endfor %}
 							</select>
 						</div>
-						
+
 						<div>
 							<p>Select assigned Company</p>
 							<select name="CompID">
@@ -53,7 +45,7 @@
 								{% endfor %}
 							</select>
 						</div>
-						
+
 						<div>
 							<p>Select assigned Department</p>
 							<select name="DepID">
@@ -68,22 +60,21 @@
 								{% endfor %}
 							</select>
 						</div>
-						
+
 						<input type="hidden" name="ProjID" value="{{ProjRow['CMProjID']}}"/>
-						<input type="submit" value="submit"/>
-						
+						<input type="submit" value="Save"/>
+
 					</div>
-						
+
 				</form>
 			{% endfor%}
 		</div>
 	</div>
-	
+
 	<div class="LinkButton">
-		<a href="{{url_for('Index')}}"><div><p>Back</p></div></a>
+		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Back</p></div></a>
 	</div>
-	
-	<div class="Footer">
-	</div>
+
+	{%include "Footer.html" %}
 </body>
 </html>

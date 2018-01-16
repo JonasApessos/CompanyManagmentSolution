@@ -5,7 +5,7 @@ def GetProjectContractList(RowType):
 	try:
 
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript = " \
 		SELECT \
 		"+PREFIX+"CMProj.CMProjID, \
@@ -26,29 +26,29 @@ def GetProjectContractList(RowType):
 		("+PREFIX+"CMProj.CMContrID = "+PREFIX+"CMContrInf.CMContrID) \
 		AND \
 		("+PREFIX+"CMProj.CMActiv = 1);";
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-		
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;
-		
-def GetProjectContractListByID(RowType, ProjID):
+
+def GetProjectContractListByID(ProjID, RowType):
 
 	try:
 
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript = " \
 		SELECT \
 		"+PREFIX+"CMProj.CMProjID, \
@@ -74,31 +74,31 @@ def GetProjectContractListByID(RowType, ProjID):
 		("+PREFIX+"CMProj.CMContrID = "+ProjID+") \
 		AND \
 		("+PREFIX+"CMProj.CMActiv = 1);";
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-		
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;
-	
-	
-	
-def GetProjectListByID(RowType, ProjID):
-	
+
+
+
+def GetProjectListByID(ProjID, RowType):
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript = " \
 		SELECT \
 		"+PREFIX+"CMProj.CMProjID, \
@@ -112,29 +112,29 @@ def GetProjectListByID(RowType, ProjID):
 		("+PREFIX+"CMProj.CMProjID = "+str(ProjID)+") \
 		AND \
 		("+PREFIX+"CMProj.CMActiv = 1)";
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
-		
+
 		Conn.CloseConnection();
-		
+
 		return Rows;
-		
+
 	except Exception as Error:
-		
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;
-	
+
 def GetProjectList(RowType):
-	
+
 	try:
-	
+
 		Conn = DatabaseQuery(PREFIX + DATABASE, int(RowType));
-		
+
 		SqlScript = " \
 		SELECT \
 		"+PREFIX+"CMProj.CMProjID, \
@@ -146,19 +146,19 @@ def GetProjectList(RowType):
 		"+PREFIX+"CMProj \
 		WHERE \
 		("+PREFIX+"CMProj.CMActiv = 1)";
-		
+
 		Rows = Conn.ExecQueryToRow(SqlScript);
 
 		Conn.CloseConnection();
-		
+
 		return Rows;
-	
+
 	except Exception as Error:
-		
+
 		Handle = ErrorHandle("ErrorLog/Log.txt", "a");
-		
-		Handle.SaveErrorToLog(Error, " -- function: "+str(inspect.stack()[0][3])+" , From file: " + str(inspect.stack()[0][1]));
-		
+
+		Handle.SaveErrorToLogNoComment(Error);
+
 		Handle.CloseStream();
-		
+
 		return None;

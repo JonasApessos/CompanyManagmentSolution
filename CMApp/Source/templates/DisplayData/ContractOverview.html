@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {%include "CSSOvervLinks.html" %}
+  </head>
+
+  <body>
+
+    {%include "Menus/MainMenu.html" %}
+
+    <div class="ItemList">
+      <h1>Contracts</h1>
+      {% for ContrRow in ContrRows %}
+      <div>
+
+        <form action="{{url_for('contrb.ContrLoad')}}" method="POST">
+          <div>
+            <p>{{ContrRow['CMProdName']}}</p>
+          </div>
+
+          <div>
+              <p>Product Title</p>
+              <p>{{ContrRow['CMProdName']}}</p>
+          </div>
+
+          <div>
+              <p>Contractor</p>
+              <p>{{ContrRow['CMContractor']}}</p>
+          </div>
+
+          <div>
+              <p>Advance Pay</p>
+              <p>{{ContrRow['CMAdvPay']}}</p>
+          </div>
+
+          <div>
+              <p>Contract Pay</p>
+              <p>{{ContrRow['CMContrPay']}}</p>
+          </div>
+
+          <div>
+              <p>Production start Date</p>
+              <p>{{ContrRow['CMDateS']}}</p>
+          </div>
+
+          <div>
+              <p>Due Date</p>
+              <p>{{ContrRow['CMDueDate']}}</p>
+          </div>
+
+          <input type="hidden" value="{{ContrRow['CMContrID']}}" name="ContrID">
+          <input type="submit" value="Edit" name="Edit">
+          <input type="submit" value="Delete" name="Del">
+
+        </form>
+      </div>
+      {% endfor %}
+      <a href="{{url_for('contrb.ContrAdd')}}"><div><p>New Contract</p></div></a>
+    </div>
+
+    <div class="LinkButton">
+      <a href="{{url_for('Index')}}"><div><p>Back</p></div></a>
+    </div>
+
+    {%include "Footer.html" %}
+
+  </body>
+</html>

@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Project/ProjAddForm/ProjAddForm.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/form/form.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Footer.css')}}">
+	{%include "CSSFormLinks.html" %}
 </head>
 <body>
-	<div class="MainMenu">
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Company's</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Employees</p></div></a>
-	</div>
-	
+	{%include "Menus/MainMenu.html" %}
+
 	<div class="FormItem">
 		<div>
 			<form action = "{{url_for('projb.AddProj')}}" method="POST">
@@ -21,7 +13,7 @@
 					<div>
 						<p>Add New Project</p>
 					</div>
-					
+
 					<div>
 						<p>Select assigned Contract</p>
 						<select name="ContrID">
@@ -30,7 +22,7 @@
 							{% endfor %}
 						</select>
 					</div>
-					
+
 					<div>
 						<p>Select assigned Company</p>
 						<select name="CompID">
@@ -39,7 +31,7 @@
 							{% endfor %}
 						</select>
 					</div>
-					
+
 					<div>
 						<p>Select assigned Department</p>
 						<select name="DepID">
@@ -48,18 +40,17 @@
 							{% endfor %}
 						</select>
 					</div>
-					
+
 					<input type="submit" value="Add"/>
 				</div>
 			</form>
 		</div>
 	</div>
-	
+
 	<div class="LinkButton">
 		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Back</p></div></a>
 	</div>
-	
-	<div class="Footer">
-	</div>
+
+	{%include "Footer.html" %}
 </body>
 </html>

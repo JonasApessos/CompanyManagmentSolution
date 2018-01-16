@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{%include "CSSFormLinks.html" %}
+</head>
+
+<body>
+  {%include "Menus/MainMenu.html" %}
+
+	<div class="FormItem">
+		<div>
+			{% for DepRow in DepRows %}
+				<form action = "{{url_for('depb.DepUpdate')}}" method="POST">
+					<div>
+						<div>
+							<p>Department ID {{DepRow['CMDepID']}}</p>
+						</div>
+
+            <div>
+              <p>Department Name</p>
+              <input type="text" value="{{DepRow['CMDepName']}}" name="DepName"/>
+            </div>
+
+						<input type="submit" value="Save"/>
+
+					</div>
+
+				</form>
+				{% endfor %}
+
+		</div>
+	</div>
+
+	<div class="LinkButton">
+		<a href="{{url_for('depb.Department')}}"><div><p>Back</p></div></a>
+	</div>
+
+	{%include "Footer.html" %}
+</body>
+</html>

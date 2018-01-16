@@ -1,59 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Project/ProjTaskAddForm/ProjTaskAddForm.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/form/form.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/MainMenu.css')}}">
-	<link rel = "stylesheet" type="text/css" href="{{url_for('static',filename='CSS/Footer.css')}}">
+	{%include "CSSFormLinks.html" %}
 </head>
 <body>
-	<div class="MainMenu">
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Projects</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Contracts</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Company's</p></div></a>
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Employees</p></div></a>
-	</div>
+	{%include "Menus/MainMenu.html" %}
 
 	<div class="FormItem">
 		<div>
-			<form action = "{{url_for('taskb.AddTask')}}" method="POST">
+			<form action = "{{url_for('taskb.TaskAdd')}}" method="POST">
 				<div>
 					<div>
 						<p>Add Task</p>
 					</div>
-				
+
 					<div>
 						<p>Assigned project</p>
 						{% for TaskProjRow in TaskProjRows %}
 							<input type="text" name="ProjID" value="{{TaskProjRow['CMProjID']}}"/>
 						{% endfor %}
 					</div>
-				
+
 					<div>
 						<p>Task Name:</p>
 						<input type="text" name="TaskName"/>
 					</div>
-					
+
 					<div>
 						<p>Positive prediction</p>
 						<input type="number" name="PosPre"/>
 					</div>
-					
+
 					<div>
 						<p>Normal prediction</p>
 						<input type="number" name="NormPre"/>
 					</div>
-					
+
 					<div>
 						<p>Negative Prediction</p>
 						<input type="number" name="NegPre"/>
 					</div>
-					
+
 					<div>
 						<p>Months</p>
 						<input type="number" name="Months"/>
 					</div>
-					
+
 					<div>
 						<p>Dependency</p>
 						{% for TaskProjRow in TaskProjRows %}
@@ -68,18 +60,17 @@
 							{% endfor %}
 						{% endfor %}
 					</div>
-					
+
 					<input type="submit" value="Add"/>
 				</div>
 			</form>
 		</div>
 	</div>
-	
+
 	<div class="LinkButton">
-		<a href="{{url_for('projb.ProjOverv')}}"><div><p>Back</p></div></a>
+		<a href="{{url_for('projb.ProjTaskDisplay')}}"><div><p>Back</p></div></a>
 	</div>
-	
-	<div class="Footer">
-	</div>
+
+	{%include "Footer.html" %}
 </body>
 </html>

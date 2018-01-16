@@ -8,13 +8,13 @@ p
 	width:100%;
 	float:left;
 	margin:auto;
-	clear:both;	
+	clear:both;
 }
 
 .FormItem div
 {
 	width:30%;
-	min-width:200px;
+	min-width:350px;
 	float:none;
 	margin:1% auto;
 	clear:both;
@@ -70,6 +70,7 @@ p
 .FormItem div div div input
 {
 	background-color:rgba(122,120,118,1.0);
+	width:40%;
 	text-align:center;
 	float:right;
 	margin:1%;
@@ -99,7 +100,7 @@ p
  {
 	 background-color:rgba(62,60,58,1.0);
  }
- 
+
  .FormItem div input:active
  {
 	 background-color:rgba(92,90,88,1.0);
@@ -119,21 +120,21 @@ p
 	outline-style:solid;
 	outline-width:2px;
 	outline-color:rgba(0,0,0,0.0);
-	
+
  }
- 
+
  .FormItem a div:hover
  {
-	background-color:rgba(62,60,58,1.0); 
+	background-color:rgba(62,60,58,1.0);
  }
- 
+
   .FormItem a div:active
  {
 	background-color:rgba(92,90,88,1.0);
 	outline-color:rgba(0,200,250,1.0);
 	outline-radius:3px;
  }
- 
+
  .FormItem a div p
  {
 	 text-align:center;

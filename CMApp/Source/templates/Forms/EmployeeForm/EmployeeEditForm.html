@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{%include "CSSFormLinks.html" %}
+</head>
+
+<body>
+  {%include "Menus/MainMenu.html" %}
+
+	<div class="FormItem">
+		<div>
+			{% for EmpRow in EmpRows %}
+				<form action = "{{url_for('empb.EmpUpdate')}}" method="POST">
+					<div>
+						<div>
+							<p>Employee ID {{EmpRow['EmpID']}}</p>
+						</div>
+
+            <div>
+              <p>Employee name</p>
+              <input type="text" value="{{EmpRow['CMEmpName']}}" name="EmpName"/>
+            </div>
+
+            <div>
+              <p>Employee City</p>
+              <input type="text" value="{{EmpRow['CMCity']}}" name="EmpCity"/>
+            </div>
+
+            <div>
+              <p>Employee CivCode</p>
+              <input type="text" value="{{EmpRow['CMCivCode']}}" name="EmpCivCode"/>
+            </div>
+
+            <div>
+              <p>Employee Birth Date</p>
+              <input type="date" value="{{EmpRow['CMBirthDate']}}" name="EmpBDate"/>
+            </div>
+
+            <div>
+              <p>Employee Income</p>
+              <input type="number" value="{{EmpRow['CMIncome']}}" name="EmpInc"/>
+            </div>
+
+						<input type="hidden" name="EmpID" value="{{EmpRow['CMEmpID']}}"/>
+						<input type="submit" value="Save"/>
+
+					</div>
+
+				</form>
+				{% endfor %}
+
+		</div>
+	</div>
+
+	<div class="LinkButton">
+		<a href="{{url_for('empb.Employee')}}"><div><p>Back</p></div></a>
+	</div>
+
+	{%include "Footer.html" %}
+</body>
+</html>
